@@ -1,0 +1,269 @@
+{
+    "i18n": true,
+    "type": "tabs",
+    "tabsStyle": {
+        "width": "calc(100% - 100px)"
+    },
+    "items": {
+        "tab1": {
+            "type": "panel",
+            "label": "Tab Device",
+            "items": {
+                "_headerAdapter": {
+                    "type": "header",
+                    "text": "ps4 adapter settings",
+                    "size": 2
+                },
+                "ps": {
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12,
+                    "noDelete": false,
+                    "type": "table",
+                    "items": [
+                        {
+                            "type": "checkbox",
+                            "attr": "active",
+                            "width": "10% ",
+                            "title": "activ",
+                            "tooltip": "activ_tooltip",
+                            "default": true,
+                            "style": {
+                                "textAlign": "center"
+                            }
+                        },
+                        {
+                            "type": "text",
+                            "attr": "ps4name",
+                            "width": "25% ",
+                            "title": "nameps4",
+                            "tooltip": "nameps4_tooltip",
+                            "default": "My Playstation"
+                        },
+                        {
+                            "type": "text",
+                            "attr": "ip",
+                            "width": "30% ",
+                            "title": "ip",
+                            "tooltip": "ip_tooltip",
+                            "default": "127.0.0.1"
+                        },
+                        {
+                            "type": "number",
+                            "attr": "interval",
+                            "width": "10% ",
+                            "title": "interval_status",
+                            "tooltip": "interval_status_tooltip",
+                            "default": 5,
+                            "max": 3600,
+                            "min": 5
+                        },
+                        {
+                            "type": "text",
+                            "attr": "icon",
+                            "width": "15% ",
+                            "title": "icon",
+                            "tooltip": "icon_tooltip",
+                            "default": ""
+                        },
+                        {
+                            "type": "text",
+                            "attr": "credential",
+                            "width": "10% ",
+                            "title": "credentials",
+                            "tooltip": "credentials_tooltip",
+                            "readOnly": true,
+                            "default": ""
+                        }
+                    ]
+                },
+                "dividerafterinterval": {
+                    "newLine": true,
+                    "type": "divider"
+                },
+                "selectPS4": {
+                    "newLine": true,
+                    "type": "selectSendTo",
+                    "label": "select_ps4",
+                    "tooltip": "select_ps4_tooltip",
+                    "alsoDependsOn": ["ps"],
+                    "command": "getTV",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "jsonData": "{\"ps4\":${JSON.stringify(data.ps)}}"
+                },
+                "checkPS": {
+                    "type": "sendTo",
+                    "command": "checkPS",
+                    "jsonData": "{\"check\":${JSON.stringify(data.selectPS4)}}",
+                    "label": "checkPSavailable",
+                    "tooltip": "checkPSavailable_tooltip",
+                    "disabled": "!data.selectPS4",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "style": {
+                        "backgroundColor": "#4dabf5",
+                        "color": "white",
+                        "margin": "12px",
+                        "padding": "4px"
+                    }
+                },
+                "textData": {
+                    "type": "textSendTo",
+                    "label": "checkMessage",
+                    "tooltip": "checkMessage_tooltip",
+                    "command": "textCheck",
+                    "jsonData": "{\"text\":${JSON.stringify(data.selectPS4)}}",
+                    "alsoDependsOn": ["selectPS4"],
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
+                },
+                "startUDP": {
+                    "type": "sendTo",
+                    "command": "startUDP",
+                    "jsonData": "{\"check\":${JSON.stringify(data.selectPS4)}}",
+                    "label": "startServer",
+                    "tooltip": "startServer_tooltip",
+                    "disabled": "!data.selectPS4",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "style": {
+                        "backgroundColor": "#4dabf5",
+                        "color": "white",
+                        "margin": "12px",
+                        "padding": "4px"
+                    }
+                },
+                "pinCode": {
+                    "newLine": true,
+                    "type": "text",
+                    "label": "pin",
+                    "tooltip": "pin_tooltip",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "disabled": "!data.selectPS4"
+                },
+                "submitPin": {
+                    "type": "sendTo",
+                    "command": "submitPin",
+                    "jsonData": "{\"pair\":${JSON.stringify(data.selectPS4)},\"pin\":${JSON.stringify(data.pinCode)}}",
+                    "label": "submitpair",
+                    "tooltip": "submitpair_tooltip",
+                    "disabled": "!data.selectPS4 && !data.pinCode",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "style": {
+                        "backgroundColor": "#4dabf5",
+                        "color": "white",
+                        "margin": "12px",
+                        "padding": "4px"
+                    }
+                },
+                "deleteCredential": {
+                    "type": "sendTo",
+                    "command": "credential",
+                    "jsonData": "{\"text\":\"credential\"}",
+                    "label": "deleteCredential",
+                    "tooltip": "deleteCredential_tooltip",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "style": {
+                        "backgroundColor": "red",
+                        "color": "white",
+                        "margin": "12px",
+                        "padding": "4px"
+                    }
+                }
+            }
+        },
+        "tab2": {
+            "type": "panel",
+            "label": "Tab Token",
+            "items": {
+                "_headerAdapter": {
+                    "type": "header",
+                    "text": "npsso",
+                    "size": 2
+                },
+                "lintToPSN": {
+                    "type": "staticLink",
+                    "text": "link login",
+                    "href": "https://my.playstation.com/",
+                    "icon": "info",
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
+                },
+                "lintToNPSSO": {
+                    "type": "staticLink",
+                    "text": "link npsso",
+                    "href": "https://ca.account.sony.com/api/v1/ssocookie",
+                    "icon": "info",
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
+                },
+                "npsso": {
+                    "newLine": true,
+                    "type": "password",
+                    "label": "cookie_npsso",
+                    "tooltip": "cookie_npsso_tooltip",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
+                },
+                "setState": {
+                    "type": "setState",
+                    "label": "deleteText",
+                    "tooltip": "deleteSession",
+                    "id": "playstation.%INSTANCE%.session",
+                    "ack": true,
+                    "val": "",
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
+                    "style": {
+                        "backgroundColor": "red",
+                        "border": "outset"
+                    }
+                }
+            }
+        }
+    }
+}
