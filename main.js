@@ -143,6 +143,7 @@ class Playstation extends utils.Adapter {
         }
         this.subscribeStates("*");
         await this.checkDeviceFolder();
+        this.setState("info.connection", { val: true, ack: true });
     }
 
     forbidden_ip(ip) {
@@ -172,6 +173,7 @@ class Playstation extends utils.Adapter {
             if (this.countLogin > 5) {
                 this.log.warn("Refresh login limit reached!! Stop all intervals");
                 this.unloadAllTimer();
+                this.setState("info.connection", { val: false, ack: true });
                 return false;
             }
             this.login();
@@ -222,6 +224,7 @@ class Playstation extends utils.Adapter {
         if (this.countLogin > 3) {
             this.log.warn("Relogin limit reached!! Stop all intervals");
             this.unloadAllTimer();
+            this.setState("info.connection", { val: false, ack: true });
             return false;
         }
         this.login();
