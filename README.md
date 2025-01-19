@@ -30,7 +30,6 @@ Load: Player and Trophies infos
 - Node 20 or 22
 - JS-Controller >= 6.0.11
 - Admin >= 7.0.23
-- PS4 Sceond-Screen APP (Connected to PlayStation Network)
 - Playstation4/5
 
 ## Tested with

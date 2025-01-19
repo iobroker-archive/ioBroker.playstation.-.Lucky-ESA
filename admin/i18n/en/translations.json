@@ -30,8 +30,8 @@
     "checkMessage_tooltip": "Result of the check",
     "deleteCredential": "Playactor-iobroker credential delete",
     "deleteCredential_tooltip": "Playactor-iobroker credential delete",
-    "startServer": "Starts UDP server",
-    "startServer_tooltip": "Starts the UDP server to collect the credentials (timeout 60 seconds)",
     "credentials": "Credential",
-    "credentials_tooltip": "Authorization data for the Playstation (playactor)"
+    "credentials_tooltip": "Authorization data for the Playstation (playactor)",
+    "npsso": "Create NPSSO Cookie",
+    "psn_account": "First create an NPSSO cookie and save the instance setting"
 }

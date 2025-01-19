@@ -10,8 +10,8 @@
     - [Einstellungen TAB Geräte](#instanz-konfiguration-tab-geräte-erstellen)
     - [Einstellungen TAB Token](#instanz-konfiguration-tab-token-erstellen)
 - [Login](#login)
-    - [Login Lokal](#login-playstation-gerät)
-    - [Login PSN](#login-psn-playsatation-network)
+    - [Schritt 1 > Login PSN](#login-psn-playsatation-network)
+    - [Schritt 2 > Login Lokal](#login-playstation-gerät)
 - [Objekte](#objekte)
     - [Übersicht Objekte](#übersicht-alle-objekte)
     - [Profil](#übersicht-objekte-profil)
@@ -53,40 +53,6 @@
 
 # Login
 
-### Login Playstation Gerät
-
-[Zusammenfassung](#zusammenfassung)
-
-1. (Router) Weise der Playstation eine feste IP zu (bitte Google verwenden)
-2. (APP) PS4 Second-Screen APP installieren und sich bei PSN anmelden (PlayStation Network). Danach APP schließen.
-3. (PS) Playstation einschalten und das Profil wählen</br>
-   ![ps4_profile.png](img/ps4_profile.png)</br>
-4. (PS) Einstellungen öffnen</br>
-   ![ps4_settings.png](img/ps4_settings.png)</br>
-5. (PS) Einstellung `mobile APP` öffnen</br>
-   ![ps4_settings_app.png](img/ps4_settings_app.png)</br>
-6. (ioBroker) Instanz Einstellung vom playstation Adapter öffnen</br>
-   ![instance_tab_device_empty.png](img/instance_tab_device_empty.png)</br>
-7. (ioBroker) Ein Gerät anlegen und unter "IP" die IP der Playstation eintragen
-8. (ioBroker) In `Welche PS4/5 soll gekoppelt werden?` dann die IP auswählen</br>
-   ![instance_tab_device_select.png](img/instance_tab_device_select.png)</br>
-9. (ioBroker) Nun den Button `Überprüfung der Playstation-Verfügbarkeit` drücken. Es erscheint eine Nachricht und ein Popup mit ok oder eine Fehlermeldung</br>
-   ![instance_tab_device_available.png](img/instance_tab_device_available.png)</br>
-10. (ioBroker) Jetzt den Button `UDP-Server starten` drücken (UDP Server bleibt 60 Sekunden geööfnet)
-11. (APP) Nun die APP PS4-Second-Screen öffnen und playactor-iobroker auswählen. Es folgt nach ca. 5 Sekunden ein Popup mit OK oder einer Fehlermeldung</br>
-    ![PS4_Second_Screen_step1.jpg](img/PS4_Second_Screen_step1.png)</br>
-    ![PS4_Second_Screen_step2.jpg](img/PS4_Second_Screen_step2.png)</br>
-12. (PS) Neues Gerät auswählen (es erscheint ein PIN)</br>
-    ![ps4_add_device.png](img/ps4_add_device.png)</br>
-    ![ps4_code.png](img/ps4_code.png)</br>
-13. (ioBroker) In `PIN-Code` den PIN eintragen
-14. (ioBroker) Button `PIN-Code senden` drücken. Es erscheint ein Popup mit ok oder eine Fehlermeldung</br>
-    ![instance_tab_device_code.png](img/instance_tab_device_code.png)</br>
-15. (PS) PIN sollte nun nicht mehr sichtbar sein und der Name playactor-iob ist zu sehen</br>
-    ![ps4_done.png](img/ps4_done.png)</br>
-16. (ioBroker) Instanz Einstellung speichern
-17. (ioBroker) Bei einer Fehlermeldung bitte Vorgang ab Punkt 9 wiederholen
-
 ### Login PSN (Playsatation Network)
 
 [Zusammenfassung](#zusammenfassung)
@@ -97,6 +63,38 @@
 3. Diesen Cookie in `NPSSO-Cookie` einfügen und die Instanz Einstellungen speichern. Dieses Cookie soll nur 2 Monate gültig sein.</br>
    ![instance_tab_token.png](img/instance_tab_token.png)</br>
    ![instance_tab_token_done.png](img/instance_tab_token_done.png)
+
+### Login Playstation Gerät
+
+[Zusammenfassung](#zusammenfassung)
+
+[Erst Schritt 1 durchführen](#login-psn-playsatation-network)</br>
+![instance_tab_token_first_psn.png](img/instance_tab_token_first_psn.png)
+
+1. (Router) Weise der Playstation eine feste IP zu (bitte Google verwenden)
+2. (PS) Playstation einschalten und das Profil wählen</br>
+   ![ps4_profile.png](img/ps4_profile.png)</br>
+3. (PS) Einstellungen öffnen</br>
+   ![ps4_settings.png](img/ps4_settings.png)</br>
+4. (PS) Einstellung `mobile APP` öffnen</br>
+   ![ps4_settings_app.png](img/ps4_settings_app.png)</br>
+5. (ioBroker) Instanz Einstellung vom playstation Adapter öffnen</br>
+   ![instance_tab_device_empty.png](img/instance_tab_device_empty.png)</br>
+6. (ioBroker) Ein Gerät anlegen und unter "IP" die IP der Playstation eintragen
+7. (ioBroker) In `Welche PS4/5 soll gekoppelt werden?` dann die IP auswählen</br>
+   ![instance_tab_device_select.png](img/instance_tab_device_select.png)</br>
+8. (ioBroker) Nun den Button `Überprüfung der Playstation-Verfügbarkeit` drücken. Es erscheint eine Nachricht und ein Popup mit ok oder eine Fehlermeldung</br>
+   ![instance_tab_device_available.png](img/instance_tab_device_available.png)</br>
+9. (PS) Neues Gerät auswählen (es erscheint ein PIN)</br>
+   ![ps4_add_device.png](img/ps4_add_device.png)</br>
+   ![ps4_code.png](img/ps4_code.png)</br>
+10. (ioBroker) In `PIN-Code` den PIN eintragen
+11. (ioBroker) Button `PIN-Code senden` drücken. Es erscheint ein Popup mit ok oder eine Fehlermeldung</br>
+    ![instance_tab_device_code.png](img/instance_tab_device_code.png)</br>
+12. (PS) PIN sollte nun nicht mehr sichtbar sein und der Name playactor-iob ist zu sehen</br>
+    ![ps4_done.png](img/ps4_done.png)</br>
+13. (ioBroker) Instanz Einstellung speichern
+14. (ioBroker) Bei einer Fehlermeldung bitte Vorgang ab Schritt 9 wiederholen
 
 # Objekte
 

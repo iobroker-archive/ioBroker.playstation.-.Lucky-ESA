@@ -30,8 +30,8 @@
     "checkMessage_tooltip": "Wynik kontroli",
     "deleteCredential": "Usuwanie danych uwierzytelniających Playactor-iobroker",
     "deleteCredential_tooltip": "Usuwanie danych uwierzytelniających Playactor-iobroker",
-    "startServer": "Uruchamia serwer UDP",
-    "startServer_tooltip": "Uruchamia serwer UDP w celu zebrania poświadczeń (limit czasu 60 sekund)",
     "credentials": "Mandat",
-    "credentials_tooltip": "Dane autoryzacyjne dla Playstation (playactor)"
+    "credentials_tooltip": "Dane autoryzacyjne dla Playstation (playactor)",
+    "npsso": "Utwórz plik cookie NPSSO",
+    "psn_account": "Najpierw utwórz plik cookie NPSSO i zapisz ustawienia instancji"
 }

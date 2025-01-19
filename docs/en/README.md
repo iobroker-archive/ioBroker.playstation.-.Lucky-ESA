@@ -10,8 +10,8 @@
     - [Settings TAB Device](#instance-settings-tab--create-device)
     - [Settings TAB Token](#instance-settings-tab--create-token)
 - [Login](#login)
-    - [Login Local](#login-playstation-device)
-    - [Login PSN](#login-psn-playsatation-network)
+    - [Step 1 > Login PSN](#login-psn-playsatation-network)
+    - [Step 2 > Login Local](#login-playstation-device)
 - [Objects](#objects)
     - [Overview Objekte](#overview-all-objects)
     - [Profile](#overview-objects-profile)
@@ -53,40 +53,6 @@
 
 # Login
 
-### Login Playstation Device
-
-[Summary](#summary)
-
-1. (Router) Assign a fixed IP to the Playstation (please use Google)
-2. (APP) Install the PS4 second-screen APP and log in to PSN (PlayStation Network). Then close the APP.
-3. (PS) Turn on the Playstation and select the profile</br>
-   ![ps4_profile.png](img/ps4_profile.png)</br>
-4. (PS) Open settings</br>
-   ![ps4_settings.png](img/ps4_settings.png)</br>
-5. (PS) Mobile App Connection Settings</br>
-   ![ps4_settings_app.png](img/ps4_settings_app.png)</br>
-6. (ioBroker) Open instance setting of the playstation adapter</br>
-   ![instance_tab_device_empty.png](img/instance_tab_device_empty.png)</br>
-7. (ioBroker) Create a device and enter the IP of the Playstation under "IP"
-8. (ioBroker) Select the IP in `Which PS4/5 to pair?`</br>
-   ![instance_tab_device_select.png](img/instance_tab_device_select.png)</br>
-9. (ioBroker) Press Button `Playstation availability check`. A message and a popup with ok or an error message will appear</br>
-   ![instance_tab_device_available.png](img/instance_tab_device_available.png)</br>
-10. (ioBroker) Press Button `Starts UDP server` (UDP server remains open for 60 seconds)
-11. (APP) Now open the APP PS4-Second-Screen and select playactor-iobroker. After about 5 seconds a popup with OK or an error message will appear</br>
-    ![PS4_Second_Screen_step1.jpg](img/PS4_Second_Screen_step1.png)</br>
-    ![PS4_Second_Screen_step2.jpg](img/PS4_Second_Screen_step2.png)</br>
-12. (PS) Press Add Device (a PIN appears)</br>
-    ![ps4_add_device.png](img/ps4_add_device.png)</br>
-    ![ps4_code.png](img/ps4_code.png)</br>
-13. (ioBroker) Enter the PIN in `Pincode`
-14. (ioBroker) Press Button `Pincode submit`. A popup with ok or an error message appears</br>
-    ![instance_tab_device_code.png](img/instance_tab_device_code.png)</br>
-15. (PS) PIN should now no longer be visible and the name playactor-iob is visible</br>
-    ![ps4_done.png](img/ps4_done.png)</br>
-16. (ioBroker) Save instance settings
-17. (ioBroker) If an error message appears, please repeat the process from point 9
-
 ### Login PSN (Playsatation Network)
 
 [Summary](#summary)
@@ -97,6 +63,38 @@
 3. Insert this cookie into `NPSSO-Cookie` and save the instance settings. This cookie should only be valid for 2 months.</br>
    ![instance_tab_token.png](img/instance_tab_token.png)</br>
    ![instance_tab_token_done.png](img/instance_tab_token_done.png)
+
+### Login Playstation Device
+
+[Summary](#summary)
+
+[First perform step 1](#login-psn-playsatation-network)</br>
+![instance_tab_token_first_psn.png](img/instance_tab_token_first_psn.png)
+
+1. (Router) Assign a fixed IP to the Playstation (please use Google)
+2. (PS) Turn on the Playstation and select the profile</br>
+   ![ps4_profile.png](img/ps4_profile.png)</br>
+3. (PS) Open settings</br>
+   ![ps4_settings.png](img/ps4_settings.png)</br>
+4. (PS) Mobile App Connection Settings</br>
+   ![ps4_settings_app.png](img/ps4_settings_app.png)</br>
+5. (ioBroker) Open instance setting of the playstation adapter</br>
+   ![instance_tab_device_empty.png](img/instance_tab_device_empty.png)</br>
+6. (ioBroker) Create a device and enter the IP of the Playstation under "IP"
+7. (ioBroker) Select the IP in `Which PS4/5 to pair?`</br>
+   ![instance_tab_device_select.png](img/instance_tab_device_select.png)</br>
+8. (ioBroker) Press Button `Playstation availability check`. A message and a popup with ok or an error message will appear</br>
+   ![instance_tab_device_available.png](img/instance_tab_device_available.png)</br>
+9. (PS) Press Add Device (a PIN appears)</br>
+   ![ps4_add_device.png](img/ps4_add_device.png)</br>
+   ![ps4_code.png](img/ps4_code.png)</br>
+10. (ioBroker) Enter the PIN in `Pincode`
+11. (ioBroker) Press Button `Pincode submit`. A popup with ok or an error message appears</br>
+    ![instance_tab_device_code.png](img/instance_tab_device_code.png)</br>
+12. (PS) PIN should now no longer be visible and the name playactor-iob is visible</br>
+    ![ps4_done.png](img/ps4_done.png)</br>
+13. (ioBroker) Save instance settings
+14. (ioBroker) If an error message appears, please repeat the process from point 9
 
 # Objects
 

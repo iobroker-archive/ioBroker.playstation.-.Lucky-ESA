@@ -30,8 +30,8 @@
     "checkMessage_tooltip": "Результат проверки",
     "deleteCredential": "Удаление учетных данных Playactor-iobroker",
     "deleteCredential_tooltip": "Удаление учетных данных Playactor-iobroker",
-    "startServer": "Запускает UDP-сервер",
-    "startServer_tooltip": "Запускает UDP-сервер для сбора учетных данных (тайм-аут 60 секунд).",
     "credentials": "Полномочия",
-    "credentials_tooltip": "Авторизационные данные для Playstation (актер)"
+    "credentials_tooltip": "Авторизационные данные для Playstation (актер)",
+    "npsso": "Создать файл cookie NPSSO",
+    "psn_account": "Сначала создайте файл cookie NPSSO и сохраните настройки экземпляра."
 }

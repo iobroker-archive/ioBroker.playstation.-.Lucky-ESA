@@ -93,7 +93,7 @@ class Playstation extends utils.Adapter {
                 const login = await this.login();
                 if (login) {
                     this.setRefreshTokenInterval();
-                    this.updateProfile(constants);
+                    await this.updateProfile(constants);
                 }
             } else if (nextStep === 1) {
                 this.refreshNewToken();
@@ -102,12 +102,24 @@ class Playstation extends utils.Adapter {
                     this.timeoutToken = null;
                     this.refreshNewToken();
                 }, nextStep);
-                this.updateProfile(constants);
+                await this.updateProfile(constants);
             }
         } else {
             this.log.info(`No NPSSO available`);
         }
         await this.setState("info.connection", { val: false, ack: true });
+        if (!this.config.psn) {
+            const accountId = await this.getStateAsync(`playstation.0.profile.account.accountId`);
+            if (accountId && accountId.val) {
+                this.log.info(`Found Accound-ID - Adapter restart!`);
+                await this.extendForeignObjectAsync(`system.adapter.${this.namespace}`, {
+                    native: {
+                        psn: true,
+                    },
+                });
+                this.log.info(`Set new config - Adapter restart!`);
+            }
+        }
         const devices = this.config.ps;
         for (const dev of devices) {
             if (!dev) {
@@ -260,13 +272,13 @@ class Playstation extends utils.Adapter {
                         );
                     }
                 }
+                this.log.info(`Set new config - Adapter restart!`);
                 await this.extendForeignObjectAsync(`system.adapter.${this.namespace}`, {
                     native: {
                         ps: this.config.ps,
                         selectPS4: "",
                     },
                 });
-                this.log.info(`Set new config - Adapter restart!`);
             } else {
                 this.log.info(`No found credentials for device ${this.config.selectPS4}`);
             }
@@ -757,18 +769,87 @@ class Playstation extends utils.Adapter {
                     this.port = 9302;
                 }
                 this.deviceData = res;
-                this.sendTo(
-                    obj.from,
-                    obj.command,
-                    { result: `1 device found. Please request access data using the PS4 Second-Screen APP.` },
-                    obj.callback,
-                );
-                this.sendTo(
-                    this.resultMessage.from,
-                    this.resultMessage.command,
-                    `1 device found. Please request access data using the PS4 Second-Screen APP.`,
-                    this.resultMessage.callback,
-                );
+                const accountId = await this.getStateAsync(`playstation.0.profile.account.accountId`);
+                const val = {};
+                const new_credential = constants.SecondScreenCredentials;
+                if (accountId && accountId.val) {
+                    new_credential["user-credential"] = this.userCredential(accountId.val);
+                    new_credential["device-discovery-protocol-version"] = this.deviceData.discoveryVersion;
+                    val[this.deviceData.id] = new_credential;
+                    const dir = path.join(homedir(), ".config");
+                    fs.mkdir(path.join(dir, "/playactor-iobroker"), err => {
+                        if (err) {
+                            this.sendTo(
+                                obj.from,
+                                obj.command,
+                                { error: `Cannot create folder - ${JSON.stringify(err)}` },
+                                obj.callback,
+                            );
+                            return;
+                        }
+                        const credentials = path.join(homedir(), ".config", "playactor-iobroker", "credentials.json");
+                        fs.writeFile(credentials, JSON.stringify(val), err => {
+                            if (err) {
+                                this.sendTo(
+                                    obj.from,
+                                    obj.command,
+                                    { error: `Cannot write device data - ${JSON.stringify(err)}` },
+                                    obj.callback,
+                                );
+                            } else {
+                                this.sendTo(obj.from, obj.command, { result: `Write successful` }, obj.callback);
+                                this.sendTo(
+                                    obj.from,
+                                    obj.command,
+                                    {
+                                        result: `1 device found. Please request access data using the PS4 Second-Screen APP.`,
+                                    },
+                                    obj.callback,
+                                );
+                                this.sendTo(
+                                    this.resultMessage.from,
+                                    this.resultMessage.command,
+                                    `1 device found. Please request access data using the PS4 Second-Screen APP.`,
+                                    this.resultMessage.callback,
+                                );
+                                let credential = {};
+                                try {
+                                    if (fs.existsSync(`${this.adapterDir}/lib/credentials.json`)) {
+                                        const data_credentials = fs.readFileSync(
+                                            `${this.adapterDir}/lib/credentials.json`,
+                                            "utf-8",
+                                        );
+                                        if (data_credentials.startsWith("{") && data_credentials.length > 10) {
+                                            credential = JSON.parse(data_credentials);
+                                        } else {
+                                            credential[this.deviceData.address.address] = {};
+                                        }
+                                    } else {
+                                        credential[this.deviceData.address.address] = {};
+                                    }
+                                } catch {
+                                    credential[this.deviceData.address.address] = {};
+                                }
+                                credential[this.deviceData.address.address] = val;
+                                fs.writeFile(
+                                    `${this.adapterDir}/lib/credentials.json`,
+                                    JSON.stringify(credential),
+                                    err => {
+                                        if (err) {
+                                            this.log.info(`Write file error: ${err}`);
+                                        } else {
+                                            this.log.info(
+                                                `File written successfully > ${this.adapterDir}/lib/credentials.json`,
+                                            );
+                                        }
+                                    },
+                                );
+                            }
+                        });
+                    });
+                } else {
+                    this.sendTo(obj.from, obj.command, { error: `No account ID found` }, obj.callback);
+                }
             }
         } else {
             this.sendTo(obj.from, obj.command, { error: "Missing IP" }, obj.callback);
@@ -847,6 +928,8 @@ class Playstation extends utils.Adapter {
     }
 
     /**
+     * Can be deleted
+     *
      * @param obj {ioBroker.Message}
      */
     startUDPServer(obj) {
@@ -896,6 +979,8 @@ class Playstation extends utils.Adapter {
     }
 
     /**
+     * Can be deleted
+     *
      * @param msg string message
      * @param info network data
      * @param obj {ioBroker.Message}

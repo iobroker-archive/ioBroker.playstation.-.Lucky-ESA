@@ -30,8 +30,8 @@
     "checkMessage_tooltip": "Ergebnis der Prüfung",
     "deleteCredential": "Playactor-iobroker-Anmeldeinformationen löschen",
     "deleteCredential_tooltip": "Playactor-iobroker-Anmeldeinformationen löschen",
-    "startServer": "UDP-Server starten",
-    "startServer_tooltip": "Starte den UDP-Server die Anmeldeinformationen zu sammeln (timeout 60 Sekunden)",
     "credentials": "Anmeldeinformation",
-    "credentials_tooltip": "Berechtigungsdaten für die Playstation (Playactor)"
+    "credentials_tooltip": "Berechtigungsdaten für die Playstation (Playactor)",
+    "npsso": "Ein NPSSO-Cookie anlegen",
+    "psn_account": "Erstellen Sie zunächst ein NPSSO-Cookie und speichern Sie die Instanzeinstellung"
 }

@@ -5,7 +5,7 @@
     "activ_tooltip": "PS4/5 actif",
     "nameps4": "Nom",
     "nameps4_tooltip": "Nom PS4/5",
-    "ip": "IP",
+    "ip": "PI",
     "ip_tooltip": "IP PS4/5",
     "select_ps4": "Quelle PS4/5 associer ?",
     "select_ps4_tooltip": "Créez votre première PS4/5 s'il vous plaît",
@@ -30,8 +30,8 @@
     "checkMessage_tooltip": "Résultat du contrôle",
     "deleteCredential": "Suppression des informations d'identification Playactor-iobroker",
     "deleteCredential_tooltip": "Suppression des informations d'identification Playactor-iobroker",
-    "startServer": "Démarre le serveur UDP",
-    "startServer_tooltip": "Démarre le serveur UDP pour collecter les informations d'identification (délai d'expiration 60 secondes)",
     "credentials": "Informations d'identification",
-    "credentials_tooltip": "Données d'autorisation pour la Playstation (playactor)"
+    "credentials_tooltip": "Données d'autorisation pour la Playstation (playactor)",
+    "npsso": "Créer un cookie NPSSO",
+    "psn_account": "Créez d'abord un cookie NPSSO et enregistrez le paramètre d'instance"
 }

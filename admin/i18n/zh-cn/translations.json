@@ -30,8 +30,8 @@
     "checkMessage_tooltip": "检查结果",
     "deleteCredential": "Playactor-iobroker 凭证删除",
     "deleteCredential_tooltip": "Playactor-iobroker 凭证删除",
-    "startServer": "启动UDP服务器",
-    "startServer_tooltip": "启动 UDP 服务器来收集凭据（超时 60 秒）",
     "credentials": "凭据",
-    "credentials_tooltip": "Playstation (playactor) 的授权数据"
+    "credentials_tooltip": "Playstation (playactor) 的授权数据",
+    "npsso": "创建 NPSSO Cookie",
+    "psn_account": "首先创建一个NPSSO cookie并保存实例设置"
 }

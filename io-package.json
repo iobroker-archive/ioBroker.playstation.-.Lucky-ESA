@@ -99,7 +99,8 @@
     "native": {
         "ps": [],
         "npsso": "",
-        "selectPS4": ""
+        "selectPS4": "",
+        "psn": false
     },
     "objects": [],
     "instanceObjects": [

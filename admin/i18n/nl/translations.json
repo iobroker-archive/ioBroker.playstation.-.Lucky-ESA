@@ -30,8 +30,8 @@
     "checkMessage_tooltip": "Resultaat van de controle",
     "deleteCredential": "Playactor-iobroker-referenties verwijderen",
     "deleteCredential_tooltip": "Playactor-iobroker-referenties verwijderen",
-    "startServer": "Start de UDP-server",
-    "startServer_tooltip": "Start de UDP-server om de inloggegevens te verzamelen (time-out 60 seconden)",
     "credentials": "Referentie",
-    "credentials_tooltip": "Autorisatiegegevens voor de PlayStation (playactor)"
+    "credentials_tooltip": "Autorisatiegegevens voor de PlayStation (playactor)",
+    "npsso": "NPSSO-cookie maken",
+    "psn_account": "Maak eerst een NPSSO-cookie en sla de instantie-instelling op"
 }
