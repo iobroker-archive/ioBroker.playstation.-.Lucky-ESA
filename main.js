@@ -117,7 +117,6 @@ class Playstation extends utils.Adapter {
                         psn: true,
                     },
                 });
-                this.log.info(`Set new config - Adapter restart!`);
             }
         }
         const devices = this.config.ps;
