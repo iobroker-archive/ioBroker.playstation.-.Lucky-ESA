@@ -787,6 +787,17 @@ class Playstation extends utils.Adapter {
                             );
                             return;
                         }
+                    });
+                    fs.mkdir(path.join(dir, "/playactor-iobroker"), err => {
+                        if (err) {
+                            this.sendTo(
+                                obj.from,
+                                obj.command,
+                                { error: `Cannot create folder - ${JSON.stringify(err)}` },
+                                obj.callback,
+                            );
+                            return;
+                        }
                         const credentials = path.join(homedir(), ".config", "playactor-iobroker", "credentials.json");
                         fs.writeFile(credentials, JSON.stringify(val), err => {
                             if (err) {
