@@ -19,6 +19,7 @@ const fs = require("node:fs");
 const { homedir } = require("node:os");
 const PS4 = require("./lib/connection");
 const helper = require("./lib/helper");
+const { createHash } = require("node:crypto");
 
 class Playstation extends utils.Adapter {
     /**
@@ -904,6 +905,7 @@ class Playstation extends utils.Adapter {
         const method = lines[0].substring(0, lines[0].indexOf(" "));
         this.log.debug(`method: ${method}`);
         let result = {};
+        result["type"] = "WAKEUP";
         for (let i = 1; i < lines.length; ++i) {
             const line = lines[i];
             this.log.debug(`LINE: ${line}`);
@@ -997,6 +999,15 @@ class Playstation extends utils.Adapter {
         } catch (e) {
             this.log.error(`setAckFlag: ${e}`);
         }
+    }
+
+    /**
+     * Credential for the palystation
+     *
+     * @param accountId PSN accountId
+     */
+    userCredential(accountId) {
+        return createHash("sha256").update(accountId).digest("hex");
     }
 }
 
