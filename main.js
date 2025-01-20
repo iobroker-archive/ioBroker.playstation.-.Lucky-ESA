@@ -8,7 +8,7 @@ const utils = require("@iobroker/adapter-core");
 const util = require("node:util");
 const udp = require("node:dgram");
 const axios = require("axios");
-const Json2iob = require("json2iob");
+const Json2iob = require("./lib/extractKeys");
 const tough = require("tough-cookie");
 const constants = require("./lib/constants");
 const requests = require("./lib/requests");
@@ -93,7 +93,7 @@ class Playstation extends utils.Adapter {
                 const login = await this.login();
                 if (login) {
                     this.setRefreshTokenInterval();
-                    await this.updateProfile(constants);
+                    await this.updateProfile(constants, true);
                 }
             } else if (nextStep === 1) {
                 this.refreshNewToken();
@@ -102,7 +102,7 @@ class Playstation extends utils.Adapter {
                     this.timeoutToken = null;
                     this.refreshNewToken();
                 }, nextStep);
-                await this.updateProfile(constants);
+                await this.updateProfile(constants, true);
             }
         } else {
             this.log.info(`No NPSSO available`);
@@ -214,7 +214,7 @@ class Playstation extends utils.Adapter {
             this.log.debug(`this.session: ${JSON.stringify(this.session)}`);
             await this.setState("session", { val: this.encrypt(JSON.stringify(this.session)), ack: true });
             this.log.info("Refresh token successful");
-            this.updateProfile(constants);
+            this.updateProfile(constants, false);
             this.countLogin = 0;
             return true;
         }
@@ -567,7 +567,7 @@ class Playstation extends utils.Adapter {
                 const lastsplit = id.split(".").pop();
                 switch (lastsplit) {
                     case "update_profile":
-                        this.updateProfile(constants);
+                        this.updateProfile(constants, false);
                         this.setAckFlag(id, { val: false });
                         break;
                     case "online_with_name":
