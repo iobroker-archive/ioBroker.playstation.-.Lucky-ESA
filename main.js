@@ -206,7 +206,7 @@ class Playstation extends utils.Adapter {
                 return null;
             });
         if (requestToken && requestToken.access_token) {
-            this.log.info(`requestToken: ${JSON.stringify(requestToken)}`);
+            this.log.debug(`requestToken: ${JSON.stringify(requestToken)}`);
             this.session.access = requestToken;
             this.session.next = new Date().getTime() + parseInt(this.session.access.expires_in) * 1000;
             this.intervalToken && this.clearInterval(this.intervalToken);
@@ -741,7 +741,7 @@ class Playstation extends utils.Adapter {
         }
         this.countDelete = 0;
         const credentials = path.join(homedir(), ".config", "playactor-iobroker");
-        this.log.info(credentials);
+        this.log.debug(credentials);
         if (fs.lstatSync(credentials).isDirectory().toString()) {
             fs.rmSync(credentials, { recursive: true });
             this.sendTo(obj.from, obj.command, { result: `Folder ${credentials} was deleted` }, obj.callback);
