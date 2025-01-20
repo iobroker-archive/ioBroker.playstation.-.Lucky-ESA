@@ -49,6 +49,7 @@ class Playstation extends utils.Adapter {
         this.trophiesTitle = requests.trophiesTitle;
         this.trophiesEarnedTitle = requests.trophiesEarnedTitle;
         this.gameTitle = requests.gameTitle;
+        this.loadReceivedRequests = requests.loadReceivedRequests;
         this.double_call = {};
         this.clients = {};
         this.session = {};
@@ -596,6 +597,14 @@ class Playstation extends utils.Adapter {
                         break;
                     case "friends_with_name_status":
                         this.loadRequest("friend", true, constants, true);
+                        this.setAckFlag(id, { val: false });
+                        break;
+                    case "received_requests_without_name":
+                        this.loadReceivedRequests(false, constants);
+                        this.setAckFlag(id, { val: false });
+                        break;
+                    case "received_requests_with_name":
+                        this.loadReceivedRequests(true, constants);
                         this.setAckFlag(id, { val: false });
                         break;
                     case "limit":

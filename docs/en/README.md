@@ -127,26 +127,30 @@ To use keys you must first press the ps key. The keys do not work in games!
 Account-ID: User number
 Online-ID: Nickname
 
-- `playstation.0.profile_remote.account_id` Display information of a user with the account ID (Ergebnis in result) [Beispiel](#request-with-accountid-playstation0profile_remoteaccount_id)
-- `playstation.0.profile_remote.blocked_with_name` Blocked users with name as array JSON (account-id and online-id) // Result unknown
-- `playstation.0.profile_remote.blocked_without_name` Blocked users as array (account-id) // Result unknown
-- `playstation.0.profile_remote.friends_with_name` List of friends as array JSON (account-id and online-id) [Beispiel](#request-playstation0profile_remotefriends_with_name)
-- `playstation.0.profile_remote.friends_with_name_status` List of friends with status infos as array JSON (account-id and online-id) [Beispiel](#request-playstation0profile_remotefriends_with_name_status)
-- `playstation.0.profile_remote.friends_without_name` List of friends as array (account-id) [Beispiel](#request-playstation0profile_remotefriends_without_name)
-- `playstation.0.profile_remote.gameList` Game list of a user with the account-ID as JSON [Beispiel](#request-playstation0profile_remotegamelist)
-- `playstation.0.profile_remote.gameTitle` Game info with the title-ID as JSON [Beispiel](#request-playstation0profile_remotegametitle)
-- `playstation.0.profile_remote.limit` Limit for inviting friends
-- `playstation.0.profile_remote.online_id` Display information of a user with the online-ID [Beispiel](#request-with-online-id-playstation0profile_remoteonline_id)
-- `playstation.0.profile_remote.online_with_name` Subscription list "Notify when available" as array JSON (account-id and online-id) // Result unknown
-- `playstation.0.profile_remote.online_without_name` Subscription list "Notify when available" as array (account id) // Result unknown
-- `playstation.0.profile_remote.result` Result of all inquiries
-- `playstation.0.profile_remote.trophies_earned_for_title` Trophies earned for the title with account-ID [Beispiel](#request-playstation0profile_remotetrophies_earned_for_title)
-- `playstation.0.profile_remote.trophies_for_title` Trophies for titles with npCommunication-id [Beispiel](#request-playstation0profile_remotetrophies_for_title)
-- `playstation.0.profile_remote.trophy_all` Trophies from a user with the online ID as array JSON [Beispiel](#request-playstation0profile_remotetrophy_all)
-- `playstation.0.profile_remote.trophy_title` Trophy title with account ID [Beispiel](#request-playstation0profile_remotetrophy_title)
-- `playstation.0.profile_remote.trophy_title_group` Trophy title group with npCommunication-id and platform [Beispiel](#request-playstation0profile_remotetrophy_title_group)
-- `playstation.0.profile_remote.trophy_title_group_user` Trophies Title User group with account ID, npCommunication-id and platform [Beispiel](#request-playstation0profile_remotetrophy_title_group_user)
-- `playstation.0.profile_remote.update_profile` Update of your profile (automatically updated every hour)
+| Object                                                      | Description                                                                        | Example                                                                         |
+| ----------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| playstation.0.profile_remote.account_id                     | Display information of a user with the account ID (Ergebnis in result)             | [Example](#request-with-accountid-playstation0profile_remoteaccount_id)         |
+| playstation.0.profile_remote.blocked_with_name              | Blocked users with name as array JSON (account-id and online-id)                   | Result unknown                                                                  |
+| playstation.0.profile_remote.blocked_without_name           | Blocked users as array (account-id)                                                | Result unknown                                                                  |
+| playstation.0.profile_remote.friends_with_name              | List of friends as array JSON (account-id and online-id)                           | [Example](#request-playstation0profile_remotefriends_with_name)                 |
+| playstation.0.profile_remote.friends_with_name_status       | List of friends with status infos as array JSON (account-id and online-id)         | [Example](#request-playstation0profile_remotefriends_with_name_status)          |
+| playstation.0.profile_remote.friends_without_name           | List of friends as array (account-id)                                              | [Example](#request-playstation0profile_remotefriends_without_name)              |
+| playstation.0.profile_remote.gameList                       | Game list of a user with the account-ID as JSON                                    | [Example](#request-playstation0profile_remotegamelist)                          |
+| playstation.0.profile_remote.gameTitle                      | Game info with the title-ID as JSON                                                | [Example](#request-playstation0profile_remotegametitle)                         |
+| playstation.0.profile_remote.limit                          | Limit for inviting friends                                                         |                                                                                 |
+| playstation.0.profile_remote.online_id                      | Display information of a user with the online-ID                                   | [Example](#request-with-online-id-playstation0profile_remoteonline_id)          |
+| playstation.0.profile_remote.online_with_name               | Subscription list "Notify when available" as array JSON (account-id and online-id) | Result unknown                                                                  |
+| playstation.0.profile_remote.online_without_name            | Subscription list "Notify when available" as array (account id)                    | Result unknown                                                                  |
+| playstation.0.profile_remote.received_requests_with_name    | Friend requests with online ID as JSON                                             | [Example](#request-playstation.0.profile_remote.received_requests_with_name)    |
+| playstation.0.profile_remote.received_requests_without_name | Friend requests without online ID as JSON                                          | [Example](#request-playstation.0.profile_remote.received_requests_without_name) |
+| playstation.0.profile_remote.result                         | Result of all inquiries                                                            |                                                                                 |
+| playstation.0.profile_remote.trophies_earned_for_title      | Trophies earned for the title with account-ID                                      | [Example](#request-playstation0profile_remotetrophies_earned_for_title)         |
+| playstation.0.profile_remote.trophies_for_title             | Trophies for titles with npCommunication-id                                        | [Example](#request-playstation0profile_remotetrophies_for_title)                |
+| playstation.0.profile_remote.trophy_all                     | Trophies from a user with the online ID as array JSON                              | [Example](#request-playstation0profile_remotetrophy_all)                        |
+| playstation.0.profile_remote.trophy_title                   | Trophy title with account ID                                                       | [Example](#request-playstation0profile_remotetrophy_title)                      |
+| playstation.0.profile_remote.trophy_title_group             | Trophy title group with npCommunication-id and platform                            | [Example](#request-playstation0profile_remotetrophy_title_group)                |
+| playstation.0.profile_remote.trophy_title_group_user        | Trophies Title User group with account ID, npCommunication-id and platform         | [Example](#request-playstation0profile_remotetrophy_title_group_user)           |
+| playstation.0.profile_remote.update_profile                 | Update of your profile (automatically updated every hour)                          |                                                                                 |
 
 ![objects_overview_profile_remote.png](img/objects_overview_profile_remote.png)
 
@@ -264,6 +268,66 @@ Online-ID: Nickname
         }
     }
 }
+```
+
+### Request `playstation.0.profile_remote.received_requests_with_name`
+
+[Summary](#summary)</br>
+[Remote PSN](#objects-profile_remote)
+
+```json
+[
+    {
+        "accountId": "00000000000000000000",
+        "onlineId": "Nickname",
+        "relation": "requested",
+        "personalDetailSharing": "none",
+        "acceptSharingPersonalDetailFlag": false,
+        "requestedDate": "2024-08-08T17:49:09.702Z"
+    },
+    {
+        "accountId": "00000000000000000000",
+        "onlineId": "Nickname",
+        "relation": "requested",
+        "personalDetailSharing": "requested",
+        "personalDetail": {
+            "firstName": "Peter",
+            "middleName": "Pan",
+            "lastName": "Pan"
+        },
+        "acceptSharingPersonalDetailFlag": true,
+        "requestedDate": "2023-12-28T17:06:33.882Z"
+    }
+]
+```
+
+### Request `playstation.0.profile_remote.received_requests_without_name`
+
+[Summary](#summary)</br>
+[Remote PSN](#objects-profile_remote)
+
+```json
+[
+    {
+        "accountId": "00000000000000000000",
+        "relation": "requested",
+        "personalDetailSharing": "none",
+        "acceptSharingPersonalDetailFlag": false,
+        "requestedDate": "2024-08-08T17:49:09.702Z"
+    },
+    {
+        "accountId": "00000000000000000000",
+        "relation": "requested",
+        "personalDetailSharing": "requested",
+        "personalDetail": {
+            "firstName": "Peter",
+            "middleName": "Pan",
+            "lastName": "Pan"
+        },
+        "acceptSharingPersonalDetailFlag": true,
+        "requestedDate": "2023-12-28T17:06:33.882Z"
+    }
+]
 ```
 
 ### Request `playstation.0.profile_remote.trophy_title`
