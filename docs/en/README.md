@@ -13,7 +13,7 @@
     - [Step 1 > Login PSN](#login-psn-playsatation-network)
     - [Step 2 > Login Local](#login-playstation-device)
 - [Objects](#objects)
-    - [Overview Objekte](#overview-all-objects)
+    - [Overview Objects](#overview-all-objects)
     - [Profile](#overview-objects-profile)
     - [Device](#overview-objects-device)
     - [Remote Local](#objects-remote)
@@ -131,6 +131,7 @@ Online-ID: Nickname
 - `playstation.0.profile_remote.blocked_with_name` Blocked users with name as array JSON (account-id and online-id) // Result unknown
 - `playstation.0.profile_remote.blocked_without_name` Blocked users as array (account-id) // Result unknown
 - `playstation.0.profile_remote.friends_with_name` List of friends as array JSON (account-id and online-id) [Beispiel](#request-playstation0profile_remotefriends_with_name)
+- `playstation.0.profile_remote.friends_with_name_status` List of friends with status infos as array JSON (account-id and online-id) [Beispiel](#request-playstation0profile_remotefriends_with_name_status)
 - `playstation.0.profile_remote.friends_without_name` List of friends as array (account-id) [Beispiel](#request-playstation0profile_remotefriends_without_name)
 - `playstation.0.profile_remote.gameList` Game list of a user with the account-ID as JSON [Beispiel](#request-playstation0profile_remotegamelist)
 - `playstation.0.profile_remote.gameTitle` Game info with the title-ID as JSON [Beispiel](#request-playstation0profile_remotegametitle)
@@ -174,7 +175,7 @@ Online-ID: Nickname
 ### Request with AccountID `playstation.0.profile_remote.account_id`
 
 [Summary](#summary)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN](#objects-profile_remote)
 
 ```json
 {
@@ -212,7 +213,7 @@ Online-ID: Nickname
 ### Request with Online-ID `playstation.0.profile_remote.online_id`
 
 [Summary](#summary)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN](#objects-profile_remote)
 
 ```json
 {
@@ -268,7 +269,7 @@ Online-ID: Nickname
 ### Request `playstation.0.profile_remote.trophy_title`
 
 [Summary](#summary)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN](#objects-profile_remote)
 
 ```json
 {
@@ -308,7 +309,7 @@ Online-ID: Nickname
 ### Request `playstation.0.profile_remote.friends_without_name`
 
 [Summary](#summary)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN](#objects-profile_remote)
 
 ```json
 ["xxxx4105713269xxxx"]
@@ -317,7 +318,7 @@ Online-ID: Nickname
 ### Request `playstation.0.profile_remote.friends_with_name`
 
 [Summary](#summary)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN](#objects-profile_remote)
 
 ```json
 [
@@ -328,10 +329,42 @@ Online-ID: Nickname
 ]
 ```
 
+### Request `playstation.0.profile_remote.friends_with_name_status`
+
+[Summary](#summary)</br>
+[Remote PSN](#objects-profile_remote)
+
+```json
+[
+    {
+        "account_id": "000000000000000000",
+        "online_id": "USERNAME",
+        "primaryOnlineStatus": "offline",
+        "onlineStatus": "offline",
+        "lastOnlineDate": "2023-05-13T13:03:26Z",
+        "gameTitle": "",
+        "availabilityStatus": "offline",
+        "avatarUrl": "http://psn-rsc.prod.dl.playstation.net/psn-rsc/avatar/EP9000/CUSA00000_00-AV00000xxxx.png",
+        "friendRelation": "friend"
+    },
+    {
+        "account_id": "000000000000000000",
+        "online_id": "USERNAME",
+        "primaryOnlineStatus": "online",
+        "onlineStatus": "online",
+        "lastOnlineDate": "2025-01-20T16:44:16.215Z",
+        "gameTitle": "Grand Theft Auto V",
+        "availabilityStatus": "online",
+        "avatarUrl": "http://psn-rsc.prod.dl.playstation.net/psn-rsc/avatar/EP9000/CUSA00000_00-AV00000xxxx.png",
+        "friendRelation": "friend"
+    }
+]
+```
+
 ### Request `playstation.0.profile_remote.trophy_title_group_user`
 
 [Summary](#summary)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN](#objects-profile_remote)
 
 Well-known platform: PS5, PS4, PS3, PSVita
 
@@ -372,7 +405,7 @@ Well-known platform: PS5, PS4, PS3, PSVita
 ### Request `playstation.0.profile_remote.trophy_title_group`
 
 [Summary](#summary)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN](#objects-profile_remote)
 
 Well-known platform: PS5, PS4, PS3, PSVita
 
@@ -417,7 +450,7 @@ Well-known platform: PS5, PS4, PS3, PSVita
 ### Request `playstation.0.profile_remote.trophy_all`
 
 [Summary](#summary)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN](#objects-profile_remote)
 
 ```json
 [
@@ -562,7 +595,7 @@ Well-known platform: PS5, PS4, PS3, PSVita
 ### Request `playstation.0.profile_remote.trophies_for_title`
 
 [Summary](#summary)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN](#objects-profile_remote)
 
 Well-known groupid: VeryRare, UltraRare, Rare, Common, all</br>
 Well-known platform: PS5, PS4, PS3, PSVita
@@ -595,7 +628,7 @@ Well-known platform: PS5, PS4, PS3, PSVita
 ### Request `playstation.0.profile_remote.trophies_earned_for_title`
 
 [Summary](#summary)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN](#objects-profile_remote)
 
 Well-known groupid: VeryRare, UltraRare, Rare, Common, all</br>
 Well-known platform: PS5, PS4, PS3, PSVita
@@ -628,7 +661,7 @@ Well-known platform: PS5, PS4, PS3, PSVita
 ### Request `playstation.0.profile_remote.gameList`
 
 [Summary](#summary)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN](#objects-profile_remote)
 
 ```json
 {
@@ -850,7 +883,7 @@ Well-known platform: PS5, PS4, PS3, PSVita
 ### Request `playstation.0.profile_remote.gameTitle`
 
 [Summary](#summary)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN](#objects-profile_remote)
 
 ```json
 [

@@ -131,6 +131,7 @@ Online-ID: Nickname
 - `playstation.0.profile_remote.blocked_with_name` Geblockte Benutzer mit Name als Array-JSON (account id und online id) // Result unknown
 - `playstation.0.profile_remote.blocked_without_name` Geblockte Benutzer als Array (account id) // Result unknown
 - `playstation.0.profile_remote.friends_with_name` Liste der Freunde als Array-JSON (account id und online id) [Beispiel](#request-playstation0profile_remotefriends_with_name)
+- `playstation.0.profile_remote.friends_with_name_status` Liste der Freunde mit Status als Array-JSON (account id und online id) [Beispiel](#request-playstation0profile_remotefriends_with_name_status)
 - `playstation.0.profile_remote.friends_without_name` Liste der Freunde als Array (account id) [Beispiel](#request-playstation0profile_remotefriends_without_name)
 - `playstation.0.profile_remote.gameList` Spieleliste eines Benutzer mit der Account-ID als JSON [Beispiel](#request-playstation0profile_remotegamelist)
 - `playstation.0.profile_remote.gameTitle` Spielinfos mit der Titel-ID als JSON [Beispiel](#request-playstation0profile_remotegametitle)
@@ -324,6 +325,38 @@ Online-ID: Nickname
     {
         "account_id": "xxxx4105713269xxxx",
         "online_id": "-xX_NICKNAME_Xx-"
+    }
+]
+```
+
+### Request `playstation.0.profile_remote.friends_with_name_status`
+
+[Zusammenfassung](#zusammenfassung)</br>
+[Remote PSN](#objekte-profile_remote)
+
+```json
+[
+    {
+        "account_id": "000000000000000000",
+        "online_id": "USERNAME",
+        "primaryOnlineStatus": "offline",
+        "onlineStatus": "offline",
+        "lastOnlineDate": "2023-05-13T13:03:26Z",
+        "gameTitle": "",
+        "availabilityStatus": "offline",
+        "avatarUrl": "http://psn-rsc.prod.dl.playstation.net/psn-rsc/avatar/EP9000/CUSA00000_00-AV00000xxxx.png",
+        "friendRelation": "friend"
+    },
+    {
+        "account_id": "000000000000000000",
+        "online_id": "USERNAME",
+        "primaryOnlineStatus": "online",
+        "onlineStatus": "online",
+        "lastOnlineDate": "2025-01-20T16:44:16.215Z",
+        "gameTitle": "Grand Theft Auto V",
+        "availabilityStatus": "online",
+        "avatarUrl": "http://psn-rsc.prod.dl.playstation.net/psn-rsc/avatar/EP9000/CUSA00000_00-AV00000xxxx.png",
+        "friendRelation": "friend"
     }
 ]
 ```

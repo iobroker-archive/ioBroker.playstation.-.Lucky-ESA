@@ -571,27 +571,31 @@ class Playstation extends utils.Adapter {
                         this.setAckFlag(id, { val: false });
                         break;
                     case "online_with_name":
-                        this.loadRequest("online", true, constants);
+                        this.loadRequest("online", true, constants, false);
                         this.setAckFlag(id, { val: false });
                         break;
                     case "online_without_name":
-                        this.loadRequest("online", false, constants);
+                        this.loadRequest("online", false, constants, false);
                         this.setAckFlag(id, { val: false });
                         break;
                     case "blocked_with_name":
-                        this.loadRequest("block", true, constants);
+                        this.loadRequest("block", true, constants, false);
                         this.setAckFlag(id, { val: false });
                         break;
                     case "blocked_without_name":
-                        this.loadRequest("block", false, constants);
+                        this.loadRequest("block", false, constants, false);
                         this.setAckFlag(id, { val: false });
                         break;
                     case "friends_with_name":
-                        this.loadRequest("friend", true, constants);
+                        this.loadRequest("friend", true, constants, false);
                         this.setAckFlag(id, { val: false });
                         break;
                     case "friends_without_name":
-                        this.loadRequest("friend", false, constants);
+                        this.loadRequest("friend", false, constants, false);
+                        this.setAckFlag(id, { val: false });
+                        break;
+                    case "friends_with_name_status":
+                        this.loadRequest("friend", true, constants, true);
                         this.setAckFlag(id, { val: false });
                         break;
                     case "limit":
