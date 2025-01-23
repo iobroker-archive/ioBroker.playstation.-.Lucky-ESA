@@ -52,7 +52,7 @@ Load: Player and Trophies infos
     ### **WORK IN PROGRESS**
 -->
 
-### **WORK IN PROGRESS**
+### 0.0.1 (2025-01-23)
 
 - (Lucky-ESA) initial release
 

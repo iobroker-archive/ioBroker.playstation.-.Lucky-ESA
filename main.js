@@ -50,6 +50,11 @@ class Playstation extends utils.Adapter {
         this.trophiesEarnedTitle = requests.trophiesEarnedTitle;
         this.gameTitle = requests.gameTitle;
         this.loadReceivedRequests = requests.loadReceivedRequests;
+        this.getUniversalSearch = requests.getUniversalSearch;
+        this.getUniversalSearchPagination = requests.getUniversalSearchPagination;
+        this.getHintAvailability = requests.getHintAvailability;
+        this.getTips = requests.getTips;
+        this.lang = "de-de";
         this.double_call = {};
         this.clients = {};
         this.session = {};
@@ -654,6 +659,28 @@ class Playstation extends utils.Adapter {
                         this.trophiesEarnedTitle(state.val, constants);
                         this.setAckFlag(id, {
                             val: JSON.stringify(["<accountId>", "<npCommunicationId>", "<groupId>", "<platform>"]),
+                        });
+                        break;
+                    case "search_user":
+                        this.getUniversalSearch(state.val, "MobileUniversalSearchSocial", constants);
+                        this.setAckFlag(id, { val: "" });
+                        break;
+                    case "search_game":
+                        this.getUniversalSearch(state.val, "MobileUniversalSearchGame", constants);
+                        this.setAckFlag(id, { val: "" });
+                        break;
+                    case "search_result_pagination":
+                        this.getUniversalSearchPagination(state.val, constants);
+                        this.setAckFlag(id);
+                        break;
+                    case "trophies_game_help_available_for_title":
+                        this.getHintAvailability(state.val, constants);
+                        this.setAckFlag(id, { val: "" });
+                        break;
+                    case "trophies_game_help_for_title":
+                        this.getTips(state.val, constants);
+                        this.setAckFlag(id, {
+                            val: JSON.stringify(["<npCommunicationId>", "<trophyId>", "<udsObjectId>", "<helpType>"]),
                         });
                         break;
                     default:
