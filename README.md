@@ -2,14 +2,24 @@
 
 # ioBroker.playstation
 
-[![NPM version](https://img.shields.io/npm/v/ioBroker.playstation.svg)](https://www.npmjs.com/package/ioBroker.playstation)
-[![Downloads](https://img.shields.io/npm/dm/ioBroker.playstation.svg)](https://www.npmjs.com/package/ioBroker.playstation)
+[![GitHub license](https://img.shields.io/github/license/Lucky-ESA/ioBroker.playstation)](https://github.com/Lucky-ESA/ioBroker.playstation/blob/main/LICENSE)
+[![NPM version](https://img.shields.io/npm/v/iobroker.playstation.svg)](https://www.npmjs.com/package/iobroker.playstation)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.playstation.svg)](https://www.npmjs.com/package/iobroker.playstation)
 ![Number of Installations](https://iobroker.live/badges/playstation-installed.svg)
+![GitHub size](https://img.shields.io/github/repo-size/Lucky-ESA/ioBroker.playstation)</br>
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Lucky-ESA/ioBroker.playstation)
+![GitHub commits since latest release](https://img.shields.io/github/commits-since/Lucky-ESA/ioBroker.playstation/latest)
+![GitHub last commit](https://img.shields.io/github/last-commit/Lucky-ESA/ioBroker.playstation)
+![GitHub issues](https://img.shields.io/github/issues/Lucky-ESA/ioBroker.playstation)</br>
+**Version:** </br>
 ![Current version in stable repository](https://iobroker.live/badges/playstation-stable.svg)
 
-[![NPM](https://nodei.co/npm/ioBroker.playstation.png?downloads=true)](https://nodei.co/npm/ioBroker.playstation/)
+[![NPM](https://nodei.co/npm/iobroker.playstation.png?downloads=true)](https://nodei.co/npm/iobroker.playstation/)
 
-**Tests:** [![Test and Release](https://github.com/Lucky-ESA/ioBroker.playstation/actions/workflows/test-and-release.yml/badge.svg)](https://github.com/Lucky-ESA/ioBroker.playstation/actions/workflows/test-and-release.yml)
+**Tests:** </br>
+[![Test and Release](https://github.com/Lucky-ESA/ioBroker.playstation/actions/workflows/test-and-release.yml/badge.svg)](https://github.com/Lucky-ESA/ioBroker.playstation/actions/workflows/test-and-release.yml)
+[![CodeQL](https://github.com/Lucky-ESA/ioBroker.playstation/actions/workflows/codeql.yml/badge.svg)](https://github.com/Lucky-ESA/ioBroker.playstation/actions/workflows/codeql.yml)
+[![Known Vulnerabilities](https://snyk.io/test/github/Lucky-ESA/ioBroker.playstation/badge.svg)](https://snyk.io/test/github/Lucky-ESA/ioBroker.playstation)
 
 ## playstation adapter for ioBroker
 
