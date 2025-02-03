@@ -505,6 +505,7 @@ class Playstation extends utils.Adapter {
      */
     onUnload(callback) {
         try {
+            this.json2iob.destroy();
             this.intervalToken && this.clearInterval(this.intervalToken);
             this.timeoutToken && this.clearTimeout(this.timeoutToken);
             this.timeoutUDP && this.clearTimeout(this.timeoutUDP);
