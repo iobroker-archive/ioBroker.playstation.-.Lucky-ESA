@@ -25,7 +25,26 @@
 
 You can wake up the Playstation or put it into standby mode. Some buttons are also possible. The PSN login can be used to load data from other players.
 
-Load: Player and Trophies infos
+### Load possible information:</br>
+
+- PlayList
+- GameList
+- Received requests
+- Friends
+- Blocked member
+- Member online (status)
+- SubscriptionList
+- All Trophies
+- Search Games
+- Search Member
+- Groups/Messages
+
+### Currently not available:</br>
+
+- Load voice data in messages
+- Load images in messages
+
+### Remote control:</br>
 
 |                  | PS4 | PS5 |
 | ---------------- | --- | --- |
