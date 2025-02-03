@@ -41,8 +41,12 @@ You can wake up the Playstation or put it into standby mode. Some buttons are al
 
 ### Currently not available:</br>
 
-- Load voice data in messages
-- Load images in messages
+- Load voice messages
+- Load images messages
+
+### In progress
+
+- Storage infomration for PS5
 
 ### Remote control:</br>
 
