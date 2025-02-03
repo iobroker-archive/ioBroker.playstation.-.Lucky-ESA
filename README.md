@@ -53,7 +53,7 @@ Load: Player and Trophies infos
 
 ## Questions
 
-🇩🇪 [Fragen]()
+🇩🇪 [Fragen](https://forum.iobroker.net/topic/79366/test-adapter-playstation?_=1738608406288)
 
 ## Changelog
 
@@ -61,6 +61,10 @@ Load: Player and Trophies infos
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+
+- (Lucky-ESA) Added groups and messages
 
 ### 0.0.1 (2025-01-23)
 

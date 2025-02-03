@@ -15,9 +15,11 @@
 - [Objekte](#objekte)
     - [Übersicht Objekte](#übersicht-alle-objekte)
     - [Profil](#übersicht-objekte-profil)
-    - [Derät](#übersicht-objekte-gerät)
+    - [Gerät](#übersicht-objekte-gerät)
     - [Remote Lokal](#objekte-remote)
-    - [Remote PSN](#objekte-profile_remote)
+    - [Remote PSN Profil](#objekte-remote_profile)
+    - [Remote PSN Trophäen](#objekte-remote_trophies)
+    - [Remote PSN Gruppen](#objekte-remote_groups)
 - [Beispiele](#arrayjson-beispiele)
 
 # Instanz Einstellungen
@@ -120,39 +122,108 @@ Um Tasten zu verwenden muss erst die Taste ps gedrückt werden. In Spielen funkt
 
 ![objects_overview_remote.png](img/objects_overview_remote.png)
 
-### Objekte profile_remote
+### Objekte remote_profile
 
 [Zusammenfassung](#zusammenfassung)
 
 Account-ID: Nummer des Benutzer
 Online-ID: Nickname
 
-| Objekt                                                      | Beschreibung                                                                                | Link Beispiel                                                                    |
-| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| playstation.0.profile_remote.account_id                     | Infos eines Benutzer ausgeben mit der Account ID (Ergebnis in result)                       | [Beispiel](#request-mit-accountid-playstation0profile_remoteaccount_id)          |
-| playstation.0.profile_remote.blocked_with_name              | Geblockte Benutzer mit Name als Array-JSON (account id und online id)                       | Result unknown                                                                   |
-| playstation.0.profile_remote.blocked_without_name           | Geblockte Benutzer als Array (account id) // Result unknown                                 |
-| playstation.0.profile_remote.friends_with_name              | Liste der Freunde als Array-JSON (account id und online id)                                 | [Beispiel](#request-playstation0profile_remotefriends_with_name)                 |
-| playstation.0.profile_remote.friends_with_name_status       | Liste der Freunde mit Status als Array-JSON (account id und online id)                      | [Beispiel](#request-playstation0profile_remotefriends_with_name_status)          |
-| playstation.0.profile_remote.friends_without_name           | Liste der Freunde als Array (account id)                                                    | [Beispiel](#request-playstation0profile_remotefriends_without_name)              |
-| playstation.0.profile_remote.gameList                       | Spieleliste eines Benutzer mit der Account-ID als JSON                                      | [Beispiel](#request-playstation0profile_remotegamelist)                          |
-| playstation.0.profile_remote.gameTitle                      | Spielinfos mit der Titel-ID als JSON                                                        | [Beispiel](#request-playstation0profile_remotegametitle)                         |
-| playstation.0.profile_remote.limit                          | Limit für das Laden der Freunde.                                                            |                                                                                  |
-| playstation.0.profile_remote.online_id                      | Infos eines Benutzer ausgeben mit der Online ID (Ergebnis in result)                        | [Beispiel](#request-mit-online-id-playstation0profile_remoteonline_id)           |
-| playstation.0.profile_remote.online_with_name               | Abonnementliste „Benachrichtigen, wenn verfügbar“ als Array-JSON (account id und online id) | Result unknown                                                                   |
-| playstation.0.profile_remote.online_without_name            | Abonnementliste „Benachrichtigen, wenn verfügbar“ als Array (account id)                    | Result unknown                                                                   |
-| playstation.0.profile_remote.received_requests_with_name    | Freundschaftsanfragen mit Online-ID als JSON                                                | [Beispiel](#request-playstation.0.profile_remote.received_requests_with_name)    |
-| playstation.0.profile_remote.received_requests_without_name | Freundschaftsanfragen ohne Online-ID als JSON                                               | [Beispiel](#request-playstation.0.profile_remote.received_requests_without_name) |
-| playstation.0.profile_remote.result                         | Ergenis aller Anfragen                                                                      |                                                                                  |
-| playstation.0.profile_remote.trophies_earned_for_title      | Für den Titel verdiente Trophäen mit Account-ID                                             | [Beispiel](#request-playstation0profile_remotetrophies_earned_for_title)         |
-| playstation.0.profile_remote.trophies_for_title             | Trophäen für Titel mit npCommunication-id                                                   | [Beispiel](#request-playstation0profile_remotetrophies_for_title)                |
-| playstation.0.profile_remote.trophy_all                     | Trohäen von einem Benutzer mit der Online-ID als Array-JSON                                 | [Beispiel](#request-playstation0profile_remotetrophy_all)                        |
-| playstation.0.profile_remote.trophy_title                   | Trophäen Titel mit Account-ID                                                               | [Beispiel](#request-playstation0profile_remotetrophy_title)                      |
-| playstation.0.profile_remote.trophy_title_group             | Trophäen Titelgruppe mit npCommunication-id und Plattform                                   | [Beispiel](#request-playstation0profile_remotetrophy_title_group)                |
-| playstation.0.profile_remote.trophy_title_group_user        | Trophäen Titel Benutzergruppe mit Account-ID, npCommunication-id und Plattform              | [Beispiel](#request-playstation0profile_remotetrophy_title_group_user)           |
-| playstation.0.profile_remote.update_profile                 | Update von deinem Profil (wird automatisch nur jede Stunde aktualisiert)                    |                                                                                  |
+| Objekt                                                              | Beschreibung                                                                                                                                                     | Link Beispiel                                                                         |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| playstation.0.profile_remote_profile.account_id                     | Infos eines Benutzer ausgeben mit der Account ID (Ergebnis in result)                                                                                            | [Beispiel](#request-mit-accountid-playstation0profile_remote_profileaccount_id)       |
+| playstation.0.profile_remote_profile.blocked_with_name              | Geblockte Benutzer mit Name als Array-JSON (account id und online id)                                                                                            | Result unknown                                                                        |
+| playstation.0.profile_remote_profile.blocked_without_name           | Geblockte Benutzer als Array (account id)                                                                                                                        | Result unknown                                                                        |
+| playstation.0.profile_remote_profile.friends_with_name              | Liste der Freunde als Array-JSON (account id und online id)                                                                                                      | [Beispiel](#request-playstation0profile_remote_profilefriends_with_name)              |
+| playstation.0.profile_remote_profile.friends_with_name_status       | Liste der Freunde mit Status als Array-JSON (account id und online id)                                                                                           | [Beispiel](#request-playstation0profile_remote_profilefriends_with_name_status)       |
+| playstation.0.profile_remote_profile.friends_without_name           | Liste der Freunde als Array (account id)                                                                                                                         | [Beispiel](#request-playstation0profile_remote_profilefriends_without_name)           |
+| playstation.0.profile_remote_profile.gameList                       | Spieleliste eines Benutzer mit der Account-ID als JSON                                                                                                           | [Beispiel](#request-playstation0profile_remote_profilegamelist)                       |
+| playstation.0.profile_remote_profile.gameTitle                      | Spielinfos mit der Titel-ID als JSON                                                                                                                             | [Beispiel](#request-playstation0profile_remote_profilegametitle)                      |
+| playstation.0.profile_remote_profile.limit                          | Limit für das Laden der Freunde.                                                                                                                                 |                                                                                       |
+| playstation.0.profile_remote_profile.offset                         | Offset für das Laden von Mitglieder und Infos                                                                                                                    |                                                                                       |
+| playstation.0.profile_remote_profile.online_id                      | Infos eines Benutzer ausgeben mit der Online ID (Ergebnis in result)                                                                                             | [Beispiel](#request-mit-online-id-playstation0profile_remote_profileonline_id)        |
+| playstation.0.profile_remote_profile.online_with_name               | Abonnementliste „Benachrichtigen, wenn verfügbar“ als Array-JSON (account id und online id)                                                                      | Result unknown                                                                        |
+| playstation.0.profile_remote_profile.online_without_name            | Abonnementliste „Benachrichtigen, wenn verfügbar“ als Array (account id)                                                                                         | Result unknown                                                                        |
+| playstation.0.profile_remote_profile.presencesUser                  | Status eines Users abfragen mit der Account-ID (Wenn der User PRIVAT eingestellt hat)                                                                            | [Beispiel](#request-playstation0profile_remote_profilepresencesuser)                  |
+| playstation.0.profile_remote_profile.received_requests_with_name    | Freundschaftsanfragen mit Online-ID als JSON                                                                                                                     | [Beispiel](#request-playstation0profile_remote_profilereceived_requests_with_name)    |
+| playstation.0.profile_remote_profile.received_requests_without_name | Freundschaftsanfragen ohne Online-ID als JSON                                                                                                                    | [Beispiel](#request-playstation0profile_remote_profilereceived_requests_without_name) |
+| playstation.0.profile_remote.result                                 | Ergebnis aller Anfragen                                                                                                                                          |                                                                                       |
+| playstation.0.profile_remote_profile.search_game                    | Spiel suchen. Maximal 15 Spiele als JSON. Für weitere Anzeigen dann die Auswahl vom State `playstation.0.profile_remote_profile.search_result_pagination` nutzen | [Beispiel](#request-playstation0profile_remote_profilesearch_game)                    |
+| playstation.0.profile_remote_profile.search_result                  | Ergebnis aller Suchanfragen                                                                                                                                      |                                                                                       |
+| playstation.0.profile_remote_profile.search_result_pagination       | Weitere 15 Spiele/User anzeigen                                                                                                                                  |                                                                                       |
+| playstation.0.profile_remote_profile.search_user                    | User suchen. Maximal 15 User als JSON. Für weitere Anzeigen dann die Auswahl vom State `playstation.0.profile_remote_profile.search_result_pagination` nutzen    | [Beispiel](#request-playstation0profile_remote_profilesearch_user)                    |
+| playstation.0.profile_remote_profile.storeWishlist                  | Wunschliste                                                                                                                                                      | [Beispiel](#request-playstation0profile_remote_profilestorewishlist)                  |
+| playstation.0.profile_remote_profile.total                          | Total der aktuellen Abfrage                                                                                                                                      |                                                                                       |
+| playstation.0.profile_remote_profile.update_profile                 | Update von deinem Profil (wird automatisch nur jede Stunde aktualisiert)                                                                                         |                                                                                       |
 
-![objects_overview_profile_remote.png](img/objects_overview_profile_remote.png)
+### Beispiel limit und offset</br>
+
+Freundeliste laden (es gibt 59 Freunde - limit max. 800)</br>
+
+- limit 20 // Es werden 20 Freunde geladen
+- offset 0 // Startet bei 0
+- Ergebnis: Es werden die Freunde 1-20 geladen
+
+- limit 20 // Es werden 20 Freunde geladen
+- offset 20 // Startet bei 21
+- Ergebnis: Es werden die Freunde 21-30 geladen
+
+- limit 20 // Es werden 20 Freunde geladen
+- offset 50 // Startet bei 51
+- Ergebnis: Es werden die Freunde 51-59 geladen
+
+- limit 20 // Es werden 20 Freunde geladen
+- offset 59 // Startet bei 59
+- Ergebnis: Die Liste ist dann leer
+
+![objects_overview_remote_profile.png](img/objects_overview_remote_profile.png)
+
+### Objekte remote_trophies
+
+[Zusammenfassung](#zusammenfassung)
+
+Account-ID: Nummer des Benutzer
+Online-ID: Nickname
+
+| Objekt                                                                       | Beschreibung                                                                                | Link Beispiel                                                                                  |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| playstation.0.profile_remote_trophies.trophies_earned_for_title              | Für den Titel verdiente Trophäen mit Account-ID                                             | [Beispiel](#request-playstation0profile_remote_trophiestrophies_earned_for_title)              |
+| playstation.0.profile_remote_trophies.trophies_for_title                     | Trophäen für Titel mit npCommunication-id                                                   | [Beispiel](#request-playstation0profile_remote_trophiestrophies_for_title)                     |
+| playstation.0.profile_remote_trophies.trophies_game_help_available_for_title | Verfügbare Spielehilfe von Trophäen mit npCommunication-id                                  | [Beispiel](#request-playstation0profile_remote_trophiestrophies_game_help_available_for_title) |
+| playstation.0.profile_remote_trophies.trophies_game_help_for_title           | Verfügbare Spielehilfe von Titel mit npCommunication-id, trophyId, udsObjectId und helpType | [Beispiel](#request-playstation0profile_remote_trophiestrophies_game_help_for_title)           |
+| playstation.0.profile_remote_trophies.trophy_all                             | Trohäen von einem Benutzer mit der Online-ID als Array-JSON                                 | [Beispiel](#request-playstation0profile_remote_trophiestrophy_all)                             |
+| playstation.0.profile_remote_trophies.trophy_title                           | Trophäen Titel mit Account-ID                                                               | [Beispiel](#request-playstation0profile_remote_trophiestrophy_title)                           |
+| playstation.0.profile_remote_trophies.trophy_title_group                     | Trophäen Titelgruppe mit npCommunication-id und Plattform                                   | [Beispiel](#request-playstation0profile_remote_trophiestrophy_title_group)                     |
+| playstation.0.profile_remote_trophies.trophy_title_group_user                | Trophäen Titel Benutzergruppe mit Account-ID, npCommunication-id und Plattform              | [Beispiel](#request-playstation0profile_remote_trophiestrophy_title_group_user)                |
+
+![objects_overview_remote_trophies.png](img/objects_overview_remote_trophies.png)
+
+### Objekte remote_groups
+
+[Zusammenfassung](#zusammenfassung)
+
+Account-ID: Nummer des Benutzer
+Online-ID: Nickname
+
+| Objekt                                                      | Beschreibung                                                                                                                            | Link Beispiel                                                                 |
+| ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| playstation.0.profile_remote_groups.createGroup             | Eine Guppe mit Mitglieder erstellen (Account-ID der Mitglieder als Array)                                                               | Result unknown                                                                |
+| playstation.0.profile_remote_groups.favorite                | Laden der Gruppen Favoriten/Keine Favoriten (alle)                                                                                      |                                                                               |
+| playstation.0.profile_remote_groups.fields                  | Welche Felder sollen geladen werden                                                                                                     |                                                                               |
+| playstation.0.profile_remote_groups.groupSettings           | Einstellung der Gruppe (Es muss eine Gruppe unter `selectGroup` ausgewählt werden)                                                      | Result unknown                                                                |
+| playstation.0.profile_remote_groups.inviteMembers           | Mitglieder in einer Gruppe hinzufügen (Account-ID der Mitglieder als Array - Es muss eine Gruppe unter `selectGroup` ausgewählt werden) | Result unknown                                                                |
+| playstation.0.profile_remote_groups.kickMember              | Ein Mitglied aus einer Gruppe mit der Account-ID entfernen (Es muss eine Gruppe unter `selectGroup` ausgewählt werden)                  | Result unknown                                                                |
+| playstation.0.profile_remote_groups.leaveGroup              | Eine Gruppe verlassen (Es muss eine Gruppe unter `selectGroup` ausgewählt werden)                                                       | Result unknown                                                                |
+| playstation.0.profile_remote_groups.limit                   | Limit für Gruppen oder Nachrichten die geladen werden sollen (siehe Beispiel unter Profil)                                              |                                                                               |
+| playstation.0.profile_remote_groups.loadGroups              | Gruppen laden                                                                                                                           | [Beispiel](#request-playstation0profile_remote_groupsloadgroups)              |
+| playstation.0.profile_remote_groups.loadGroups_with_message | Gruppen mit Nachrichten laden (siehe Beispiel unter Profil)                                                                             | [Beispiel](#request-playstation0profile_remote_groupsloadgroups_with_message) |
+| playstation.0.profile_remote_groups.offset                  | Offset für das Laden von Gruppen                                                                                                        |                                                                               |
+| playstation.0.profile_remote_groups.result                  | Ergebnis von Gruppen oder Gruppen mit Nachrichten laden als JSON                                                                        |                                                                               |
+| playstation.0.profile_remote_groups.selectGroup             | Gruppen ID vom Ergebnis Gruppen oder Gruppen mit Nachrichten laden. Bei Auswahl einer Gruppe werden die Nachrichten geladen             | [Beispiel](#request-playstation0profile_remote_groupsselectgroup)             |
+| playstation.0.profile_remote_groups.sendGroupMessage        | Nachricht an eine ausgewählte Gruppe senden (Es muss eine Gruppe unter `selectGroup` ausgewählt werden)                                 | Result unknown                                                                |
+| playstation.0.profile_remote_groups.total                   | Anzahl aller möglichen Gruppen oder Nachrichten (wichtig für limit und offset)                                                          |                                                                               |
+
+![objects_overview_remote_groups.png](img/objects_overview_remote_groups.png)
 
 ### Übersicht alle Objekte
 
@@ -176,10 +247,10 @@ Online-ID: Nickname
 
 [Zusammenfassung](#zusammenfassung)
 
-### Request mit AccountID `playstation.0.profile_remote.account_id`
+### Request mit AccountID `playstation.0.profile_remote_profile.account_id`
 
 [Zusammenfassung](#zusammenfassung)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN Profil](#objekte-remote_profile)
 
 ```json
 {
@@ -214,10 +285,10 @@ Online-ID: Nickname
 }
 ```
 
-### Request mit Online-ID `playstation.0.profile_remote.online_id`
+### Request mit Online-ID `playstation.0.profile_remote_profile.online_id`
 
 [Zusammenfassung](#zusammenfassung)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN Profil](#objekte-remote_profile)
 
 ```json
 {
@@ -270,119 +341,667 @@ Online-ID: Nickname
 }
 ```
 
-### Request `playstation.0.profile_remote.received_requests_with_name`
+### Request `playstation.0.profile_remote_groups.loadGroups`
 
 [Zusammenfassung](#zusammenfassung)</br>
-[Remote PSN](#objekte-profile_remote)
-
-```json
-[
-    {
-        "accountId": "00000000000000000000",
-        "onlineId": "Nickname",
-        "relation": "requested",
-        "personalDetailSharing": "none",
-        "acceptSharingPersonalDetailFlag": false,
-        "requestedDate": "2024-08-08T17:49:09.702Z"
-    },
-    {
-        "accountId": "00000000000000000000",
-        "onlineId": "Nickname",
-        "relation": "requested",
-        "personalDetailSharing": "requested",
-        "personalDetail": {
-            "firstName": "Peter",
-            "middleName": "Pan",
-            "lastName": "Pan"
-        },
-        "acceptSharingPersonalDetailFlag": true,
-        "requestedDate": "2023-12-28T17:06:33.882Z"
-    }
-]
-```
-
-### Request `playstation.0.profile_remote.received_requests_without_name`
-
-[Zusammenfassung](#zusammenfassung)</br>
-[Remote PSN](#objekte-profile_remote)
-
-```json
-[
-    {
-        "accountId": "00000000000000000000",
-        "relation": "requested",
-        "personalDetailSharing": "none",
-        "acceptSharingPersonalDetailFlag": false,
-        "requestedDate": "2024-08-08T17:49:09.702Z"
-    },
-    {
-        "accountId": "00000000000000000000",
-        "relation": "requested",
-        "personalDetailSharing": "requested",
-        "personalDetail": {
-            "firstName": "Peter",
-            "middleName": "Pan",
-            "lastName": "Pan"
-        },
-        "acceptSharingPersonalDetailFlag": true,
-        "requestedDate": "2023-12-28T17:06:33.882Z"
-    }
-]
-```
-
-### Request `playstation.0.profile_remote.trophy_title`
-
-[Zusammenfassung](#zusammenfassung)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN Gruppen](#objekte-remote_groups)
 
 ```json
 {
-    "trophyTitles": [
+    "groups": [
         {
-            "npServiceName": "trophy",
-            "npCommunicationId": "NPWR13511_00", // npCommunicationId
-            "trophySetVersion": "01.00",
-            "trophyTitleName": "Nidhogg 2",
-            "trophyTitleDetail": "Trophies for Nidhogg 2",
-            "trophyTitleIconUrl": "https://image.api.playstation.com/trophy/np/NPWR13511_00_00FFFxxxxx.PNG",
-            "trophyTitlePlatform": "PS4",
-            "hasTrophyGroups": false,
-            "trophyGroupCount": 1,
-            "definedTrophies": {
-                "bronze": 7,
-                "silver": 6,
-                "gold": 0,
-                "platinum": 0
+            "groupId": "~0FA0xxxxxBD2F.5B0B4EA11A655913",
+            "groupType": 0,
+            "modifiedTimestamp": "1719100599882",
+            "groupName": {
+                "value": "",
+                "status": 0
             },
-            "progress": 5,
-            "earnedTrophies": {
-                "bronze": 1,
-                "silver": 0,
-                "gold": 0,
-                "platinum": 0
+            "groupIcon": {
+                "status": 0
             },
-            "hiddenFlag": false,
-            "lastUpdatedDateTime": "2022-08-17T17:19:07Z"
+            "joinedTimestamp": "1555154736000",
+            "isFavorite": false,
+            "existsNewArrival": false,
+            "mainThread": {
+                "threadId": "~0FA0xxxxxBD2F.5B0B4EA11A655913",
+                "modifiedTimestamp": "1719100599882",
+                "latestMessage": {
+                    "messageUid": "1#44xxxxxx69930",
+                    "messageType": 1,
+                    "alternativeMessageType": 1,
+                    "body": "G",
+                    "createdTimestamp": "1719100599882",
+                    "sender": {
+                        "accountId": "112610000046479",
+                        "onlineId": "Nickname"
+                    }
+                },
+                "existsUnreadMessage": false
+            },
+            "members": [
+                {
+                    "accountId": "1719100599882",
+                    "onlineId": "Nickname"
+                },
+                {
+                    "accountId": "6560400000010131",
+                    "onlineId": "Nickname"
+                }
+            ]
+        },
+        {
+            "groupId": "e38d154e00000e1491b1bd82bb9c1aba4857-539",
+            "groupType": 1,
+            "modifiedTimestamp": "1703481177046",
+            "groupName": {
+                "value": "Discord.gg/x22 | modz.link",
+                "status": 1,
+                "modifier": {
+                    "accountId": "7199080000864",
+                    "onlineId": "mZN0000005wQ"
+                },
+                "modifiedTimestamp": "1644041589000"
+            },
+            "groupIcon": {
+                "status": 0
+            },
+            "joinedTimestamp": "1644041585000",
+            "isFavorite": false,
+            "existsNewArrival": false,
+            "mainThread": {
+                "threadId": "e38d154e00000e1491b1bd82bb9c1aba4857-539",
+                "modifiedTimestamp": "1703481177046",
+                "latestMessage": {
+                    "messageUid": "1#43000903",
+                    "messageType": 1,
+                    "alternativeMessageType": 1,
+                    "body": "FELIZ Navidad PT",
+                    "createdTimestamp": "1703481177046",
+                    "sender": {
+                        "accountId": "6560xxxxx451978",
+                        "onlineId": "Nickname"
+                    }
+                },
+                "existsUnreadMessage": true
+            },
+            "members": [
+                {
+                    "accountId": "656000010821014",
+                    "onlineId": "Nickname"
+                },
+                {
+                    "accountId": "65600000451978",
+                    "onlineId": "Nickname"
+                }
+            ]
+        },
+        {
+            "groupId": "a36f70000de9ed6dee629d33dcb4601ae379f-71",
+            "groupType": 1,
+            "modifiedTimestamp": "1702588783522",
+            "groupName": {
+                "value": "Free PSN Gift Cards",
+                "status": 1,
+                "modifier": {
+                    "accountId": "595000005350695",
+                    "onlineId": "Nickname"
+                },
+                "modifiedTimestamp": "1547344802000"
+            },
+            "groupIcon": {
+                "status": 0
+            },
+            "joinedTimestamp": "1547344802000",
+            "isFavorite": false,
+            "existsNewArrival": false,
+            "mainThread": {
+                "threadId": "a36f70000de9ed6dee629d33dcb4601ae379f-71",
+                "modifiedTimestamp": "1702588783522",
+                "latestMessage": {
+                    "messageUid": "1#435000008581820",
+                    "messageType": 2002,
+                    "alternativeMessageType": 2001,
+                    "body": "xx.",
+                    "createdTimestamp": "1702588783522",
+                    "sender": {
+                        "accountId": "8551000233923",
+                        "onlineId": "Nickname"
+                    }
+                },
+                "existsUnreadMessage": false
+            },
+            "members": [
+                {
+                    "accountId": "159500035000520",
+                    "onlineId": "Nickname"
+                },
+                {
+                    "accountId": "283600005100992",
+                    "onlineId": "Nickname"
+                }
+            ]
         }
     ],
-    "nextOffset": 100,
-    "totalItemCount": 127
+    "previousOffset": 0,
+    "nextOffset": 5,
+    "totalGroupCount": 59
 }
 ```
 
-### Request `playstation.0.profile_remote.friends_without_name`
+### Request `playstation.0.profile_remote_groups.loadGroups_with_message`
 
 [Zusammenfassung](#zusammenfassung)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN Gruppen](#objekte-remote_groups)
+
+```json
+{
+    "groups": [
+        {
+            "groupId": "~0FA0xxxxxBD2F.5B0B4EA11A655913",
+            "groupType": 0,
+            "modifiedTimestamp": "1719100599882",
+            "groupName": {
+                "value": "",
+                "status": 0
+            },
+            "groupIcon": {
+                "status": 0
+            },
+            "joinedTimestamp": "1555154736000",
+            "isFavorite": false,
+            "existsNewArrival": false,
+            "mainThread": {
+                "threadId": "~0FA0xxxxxBD2F.5B0B4EA11A655913",
+                "modifiedTimestamp": "1719100599882",
+                "latestMessage": {
+                    "messageUid": "1#44xxxxxx69930",
+                    "messageType": 1,
+                    "alternativeMessageType": 1,
+                    "body": "G",
+                    "createdTimestamp": "1719100599882",
+                    "sender": {
+                        "accountId": "112610000046479",
+                        "onlineId": "Nickname"
+                    }
+                },
+                "existsUnreadMessage": false
+            },
+            "members": [
+                {
+                    "accountId": "1719100599882",
+                    "onlineId": "Nickname"
+                },
+                {
+                    "accountId": "6560400000010131",
+                    "onlineId": "Nickname"
+                }
+            ]
+        },
+        {
+            "groupId": "e38d154e00000e1491b1bd82bb9c1aba4857-539",
+            "groupType": 1,
+            "modifiedTimestamp": "1703481177046",
+            "groupName": {
+                "value": "Discord.gg/x22 | modz.link",
+                "status": 1,
+                "modifier": {
+                    "accountId": "7199080000864",
+                    "onlineId": "mZN0000005wQ"
+                },
+                "modifiedTimestamp": "1644041589000"
+            },
+            "groupIcon": {
+                "status": 0
+            },
+            "joinedTimestamp": "1644041585000",
+            "isFavorite": false,
+            "existsNewArrival": false,
+            "mainThread": {
+                "threadId": "e38d154e00000e1491b1bd82bb9c1aba4857-539",
+                "modifiedTimestamp": "1703481177046",
+                "latestMessage": {
+                    "messageUid": "1#43000903",
+                    "messageType": 1,
+                    "alternativeMessageType": 1,
+                    "body": "FELIZ Navidad PT",
+                    "createdTimestamp": "1703481177046",
+                    "sender": {
+                        "accountId": "6560xxxxx451978",
+                        "onlineId": "Nickname"
+                    }
+                },
+                "existsUnreadMessage": true
+            },
+            "members": [
+                {
+                    "accountId": "656000010821014",
+                    "onlineId": "Nickname"
+                },
+                {
+                    "accountId": "65600000451978",
+                    "onlineId": "Nickname"
+                }
+            ]
+        },
+        {
+            "groupId": "a36f70000de9ed6dee629d33dcb4601ae379f-71",
+            "groupType": 1,
+            "modifiedTimestamp": "1702588783522",
+            "groupName": {
+                "value": "Free PSN Gift Cards",
+                "status": 1,
+                "modifier": {
+                    "accountId": "595000005350695",
+                    "onlineId": "Nickname"
+                },
+                "modifiedTimestamp": "1547344802000"
+            },
+            "groupIcon": {
+                "status": 0
+            },
+            "joinedTimestamp": "1547344802000",
+            "isFavorite": false,
+            "existsNewArrival": false,
+            "mainThread": {
+                "threadId": "a36f70000de9ed6dee629d33dcb4601ae379f-71",
+                "modifiedTimestamp": "1702588783522",
+                "latestMessage": {
+                    "messageUid": "1#435000008581820",
+                    "messageType": 2002,
+                    "alternativeMessageType": 2001,
+                    "body": "xx.",
+                    "createdTimestamp": "1702588783522",
+                    "sender": {
+                        "accountId": "8551000233923",
+                        "onlineId": "Nickname"
+                    }
+                },
+                "existsUnreadMessage": false
+            },
+            "members": [
+                {
+                    "accountId": "159500035000520",
+                    "onlineId": "Nickname"
+                },
+                {
+                    "accountId": "283600005100992",
+                    "onlineId": "Nickname"
+                }
+            ]
+        }
+    ],
+    "previousOffset": 0,
+    "nextOffset": 5,
+    "totalGroupCount": 59,
+    "message": {
+        "messages": [
+            {
+                "messageUid": "1#440089753569930",
+                "messageType": 1,
+                "alternativeMessageType": 1,
+                "body": "G",
+                "createdTimestamp": "1719100599882",
+                "sender": {
+                    "accountId": "1126107779607346479",
+                    "onlineId": "user"
+                }
+            },
+            {
+                "messageUid": "1#398100000018575",
+                "messageType": 1011,
+                "alternativeMessageType": 1,
+                "body": "",
+                "createdTimestamp": "1555180703000",
+                "sender": {
+                    "accountId": "112600000346479",
+                    "onlineId": "user"
+                },
+                "messageDetail": {
+                    "voiceMessageDetail": {
+                        "resourceId": "3210FA0BD0F264CBD2F.00000_message_398126260218575_1555180703978",
+                        "playbackTime": 6
+                    }
+                }
+            },
+            {
+                "messageUid": "1#39000001974",
+                "messageType": 1011,
+                "alternativeMessageType": 1,
+                "body": "",
+                "createdTimestamp": "1555180620000",
+                "sender": {
+                    "accountId": "11260000346479",
+                    "onlineId": "user"
+                },
+                "messageDetail": {
+                    "voiceMessageDetail": {
+                        "resourceId": "3210FA0BD0F264CBD2F.0000_message_398126238901974_1555180620710",
+                        "playbackTime": 3
+                    }
+                }
+            },
+            {
+                "messageUid": "1#39810000456442",
+                "messageType": 1,
+                "alternativeMessageType": 1,
+                "body": "Bin in party",
+                "createdTimestamp": "1555180611000",
+                "sender": {
+                    "accountId": "6560400010131",
+                    "onlineId": "user"
+                }
+            }
+        ],
+        "previous": "1#398119612670854",
+        "next": "1#440089753569930",
+        "reachedEndOfPage": true,
+        "messageCount": 16
+    }
+}
+```
+
+### Request `playstation.0.profile_remote_groups.selectGroup`
+
+[Zusammenfassung](#zusammenfassung)</br>
+[Remote PSN Gruppen](#objekte-remote_groups)
+
+```json
+{
+    "messages": [
+        {
+            "messageUid": "1#440089753569930",
+            "messageType": 1,
+            "alternativeMessageType": 1,
+            "body": "G",
+            "createdTimestamp": "1719100599882",
+            "sender": {
+                "accountId": "1126107779607346479",
+                "onlineId": "user"
+            }
+        },
+        {
+            "messageUid": "1#398100000018575",
+            "messageType": 1011,
+            "alternativeMessageType": 1,
+            "body": "",
+            "createdTimestamp": "1555180703000",
+            "sender": {
+                "accountId": "112600000346479",
+                "onlineId": "user"
+            },
+            "messageDetail": {
+                "voiceMessageDetail": {
+                    "resourceId": "3210FA0BD0F264CBD2F.00000_message_398126260218575_1555180703978",
+                    "playbackTime": 6
+                }
+            }
+        },
+        {
+            "messageUid": "1#39000001974",
+            "messageType": 1011,
+            "alternativeMessageType": 1,
+            "body": "",
+            "createdTimestamp": "1555180620000",
+            "sender": {
+                "accountId": "11260000346479",
+                "onlineId": "user"
+            },
+            "messageDetail": {
+                "voiceMessageDetail": {
+                    "resourceId": "3210FA0BD0F264CBD2F.0000_message_398126238901974_1555180620710",
+                    "playbackTime": 3
+                }
+            }
+        },
+        {
+            "messageUid": "1#39810000456442",
+            "messageType": 1,
+            "alternativeMessageType": 1,
+            "body": "Bin in party",
+            "createdTimestamp": "1555180611000",
+            "sender": {
+                "accountId": "6560400010131",
+                "onlineId": "user"
+            }
+        }
+    ],
+    "previous": "1#398119612670854",
+    "next": "1#440089753569930",
+    "reachedEndOfPage": true,
+    "messageCount": 16
+}
+```
+
+### Request `playstation.0.profile_remote_profile.received_requests_with_name`
+
+[Zusammenfassung](#zusammenfassung)</br>
+[Remote PSN Profil](#objekte-remote_profile)
+
+```json
+[
+    {
+        "accountId": "00000000000000000000",
+        "onlineId": "Nickname",
+        "relation": "requested",
+        "personalDetailSharing": "none",
+        "acceptSharingPersonalDetailFlag": false,
+        "requestedDate": "2024-08-08T17:49:09.702Z"
+    },
+    {
+        "accountId": "00000000000000000000",
+        "onlineId": "Nickname",
+        "relation": "requested",
+        "personalDetailSharing": "requested",
+        "personalDetail": {
+            "firstName": "Peter",
+            "middleName": "Pan",
+            "lastName": "Pan"
+        },
+        "acceptSharingPersonalDetailFlag": true,
+        "requestedDate": "2023-12-28T17:06:33.882Z"
+    }
+]
+```
+
+### Request `playstation.0.profile_remote_profile.presencesUser`
+
+[Zusammenfassung](#zusammenfassung)</br>
+[Remote PSN Gruppen](#objekte-remote_groups)
+
+```json
+{
+    "basicPresence": {
+        "availability": "unavailable",
+        "lastAvailableDate": "2025-01-31T05:55:36.666Z",
+        "primaryPlatformInfo": {
+            "onlineStatus": "offline",
+            "platform": "PS5",
+            "lastOnlineDate": "2025-01-31T05:55:36.666Z"
+        }
+    }
+}
+```
+
+### Request `playstation.0.profile_remote_profile.received_requests_without_name`
+
+[Zusammenfassung](#zusammenfassung)</br>
+[Remote PSN Profil](#objekte-remote_profile)
+
+```json
+[
+    {
+        "accountId": "00000000000000000000",
+        "relation": "requested",
+        "personalDetailSharing": "none",
+        "acceptSharingPersonalDetailFlag": false,
+        "requestedDate": "2024-08-08T17:49:09.702Z"
+    },
+    {
+        "accountId": "00000000000000000000",
+        "relation": "requested",
+        "personalDetailSharing": "requested",
+        "personalDetail": {
+            "firstName": "Peter",
+            "middleName": "Pan",
+            "lastName": "Pan"
+        },
+        "acceptSharingPersonalDetailFlag": true,
+        "requestedDate": "2023-12-28T17:06:33.882Z"
+    }
+]
+```
+
+### Request `playstation.0.profile_remote_profile.friends_without_name`
+
+[Zusammenfassung](#zusammenfassung)</br>
+[Remote PSN Profil](#objekte-remote_profile)
 
 ```json
 ["xxxx4105713269xxxx"]
 ```
 
-### Request `playstation.0.profile_remote.friends_with_name`
+### Request `playstation.0.profile_remote_profile.search_game`
 
 [Zusammenfassung](#zusammenfassung)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN Profil](#objekte-remote_profile)
+
+```json
+{
+  "data": {
+    "universalContextSearch": {
+      "__typename": "UniversalContextSearchResponse",
+      "queryFrequency": {
+        "__typename": "QueryFrequency",
+        "filterDebounceMs": 1000,
+        "searchDebounceMs": 500
+      },
+      "results": [
+        {
+          "__typename": "UniversalDomainSearchResponse",
+          "domain": "MobileGames",
+          "domainTitle": "Full Games",
+          "next": "CA8abQo6YWIzYjAzZDctZTZjZi00YjU3LWI2MzEtYzVjY2Y4MGYyMDIwLThOVG1SeWRKLTItMTcyNDY5NTIwMBIvc2VhcmNoLXJlbGV2YW5jeS1jb25jZXB0LWdhbWUtbWwtbW9kZWwtYmxhY2tleWUiHnNlYXJjaC5ub19leHBlcmltZW50Lm5vbi4wLm5vbioELTk0NA",
+          "searchResults": [
+            {
+              "__typename": "SearchResultItem",
+              "highlight": {
+                "__typename": "ItemHighlight",
+                "name": [
+                  "",
+                  "BATMAN",
+                  "™: ARKHAM KNIGHT"
+                ]
+              },
+              "id": "200472",
+              "result": {
+                "__typename": "Concept",
+                "defaultProduct": {
+                  "__typename": "Product",
+                  "id": "UP1018-CUSA00133_00-BATMANARKHAMKNHT",
+                  "invariantName": "Batman™: Arkham Knight",
+                  "itemType": "CONCEPTPRODUCT",
+                  "localizedStoreDisplayClassification": "Full Game",
+                }
+              }
+            }
+          ]
+            <#-- truncated --#>
+          "totalResultCount": 83,
+          "zeroState": false
+        }
+      ]
+    }
+  }
+}
+```
+
+### Request `playstation.0.profile_remote_profile.search_user`
+
+[Zusammenfassung](#zusammenfassung)</br>
+[Remote PSN Profil](#objekte-remote_profile)
+
+Suche: username
+
+```json
+{
+  "data": {
+    "universalContextSearch": {
+      "__typename": "UniversalContextSearchResponse",
+      "queryFrequency": {
+        "__typename": "QueryFrequency",
+        "filterDebounceMs": 1000,
+        "searchDebounceMs": 500
+      },
+      "results": [
+        {
+          "__typename": "UniversalDomainSearchResponse",
+          "domain": "SocialAllAccounts",
+          "domainTitle": "Players",
+          "next": "eyJTTyI6MTV9",
+          "searchResults": [
+            {
+              "__typename": "SearchResultItem",
+              "highlight": {
+                "__typename": "PlayerHighlight",
+                "firstName": null,
+                "lastName": null,
+                "middleName": null,
+                "onlineId": [
+                  "",
+                  "Username"
+                ],
+                "verifiedUserName": null
+              },
+              "id": "ABCxyz==",
+              "result": {
+                "__typename": "Player",
+                "accountId": "0000000000000000000",
+                "avatarUrl": "http://psn-rsc.prod.dl.playstation.net/psn-rsc/avatar/UT0016/CUSA06833_00-AV00000000000001_72E7CFC37BB24D706E60_l.png",
+                "displayName": "Username",
+                "displayNameHighlighted": [],
+                "firstName": null,
+                "id": "ABCxyz==",
+                "isPsPlus": false,
+                "itemType": "SOCIAL",
+                "lastName": null,
+                "middleName": null,
+                "onlineId": "Username",
+                "onlineIdHighlighted": [
+                  "",
+                  "Username"
+                ],
+                "profilePicUrl": null,
+                "relationshipState": null
+              },
+              "resultOriginFlag": null
+            },
+          ]
+            <#-- truncated --#>
+          "totalResultCount": 128,
+          "zeroState": false
+        }
+      ]
+    }
+  }
+}
+```
+
+### Request `playstation.0.profile_remote_profile.storeWishlist`
+
+[Zusammenfassung](#zusammenfassung)</br>
+[Remote PSN Profil](#objekte-remote_profile)
+
+```json
+{
+    "storeWishlist": []
+}
+```
+
+### Request `playstation.0.profile_remote_profile.friends_with_name`
+
+[Zusammenfassung](#zusammenfassung)</br>
+[Remote PSN Profil](#objekte-remote_profile)
 
 ```json
 [
@@ -393,10 +1012,10 @@ Online-ID: Nickname
 ]
 ```
 
-### Request `playstation.0.profile_remote.friends_with_name_status`
+### Request `playstation.0.profile_remote_profile.friends_with_name_status`
 
 [Zusammenfassung](#zusammenfassung)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN Profil](#objekte-remote_profile)
 
 ```json
 [
@@ -425,10 +1044,10 @@ Online-ID: Nickname
 ]
 ```
 
-### Request `playstation.0.profile_remote.trophy_title_group_user`
+### Request `playstation.0.profile_remote_trophies.trophy_title_group_user`
 
 [Zusammenfassung](#zusammenfassung)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN Trophäen](#objekte-remote_trophies)
 
 Bekannte paltform: PS5, PS4, PS3, PSVita
 
@@ -466,10 +1085,10 @@ Bekannte paltform: PS5, PS4, PS3, PSVita
 }
 ```
 
-### Request `playstation.0.profile_remote.trophy_title_group`
+### Request `playstation.0.profile_remote_trophies.trophy_title_group`
 
 [Zusammenfassung](#zusammenfassung)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN Trophäen](#objekte-remote_trophies)
 
 Bekannte paltform: PS5, PS4, PS3, PSVita
 
@@ -511,10 +1130,263 @@ Bekannte paltform: PS5, PS4, PS3, PSVita
 }
 ```
 
-### Request `playstation.0.profile_remote.trophy_all`
+### Request `playstation.0.profile_remote_trophies.trophies_game_help_for_title`
 
 [Zusammenfassung](#zusammenfassung)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN Trophäen](#objekte-remote_trophies)
+
+```json
+{
+    "data": {
+        "tipsRetrieve": {
+            "__typename": "Tips",
+            "hasAccess": true,
+            "trophies": [
+                {
+                    "__typename": "TrophyTip",
+                    "groups": [
+                        {
+                            "__typename": "TipGroup",
+                            "groupId": null,
+                            "groupName": null,
+                            "tipContents": [
+                                {
+                                    "__typename": "TipContent",
+                                    "description": "The gatcha prize you seek is inside a silver ball, but which one? You just have to keep playing to find out. ",
+                                    "displayName": "Since 1995",
+                                    "mediaId": "psn534f6d378d6841939cd709202c46a220",
+                                    "mediaType": "VIDEO",
+                                    "mediaUrl": "https://gms-ght.playstation-cloud.com/2/417ff4e103ec31d38e559f87ff12e53e131e1d2c/psn534f6d378d6841939cd709202c46a220/private/video/master_playlist.m3u8?token=redacted",
+                                    "tipId": "NPWR20188_00__GATCHA_SECRET_H1"
+                                }
+                            ]
+                        }
+                    ],
+                    "id": "NPWR20188_00::18",
+                    "totalGroupCount": 1,
+                    "trophyId": "18"
+                }
+            ]
+        }
+    }
+}
+```
+
+### Request `playstation.0.profile_remote_trophies.trophies_game_help_available_for_title`
+
+[Zusammenfassung](#zusammenfassung)</br>
+[Remote PSN Trophäen](#objekte-remote_trophies)
+
+```json
+{
+    "data": {
+        "hintAvailabilityRetrieve": {
+            "__typename": "HintAvailability",
+            "trophies": [
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::18",
+                    "trophyId": "18",
+                    "udsObjectId": "GATCHA_SECRET"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::21",
+                    "trophyId": "21",
+                    "udsObjectId": "PLAZA_SEND_BOT_FLYING"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::22",
+                    "trophyId": "22",
+                    "udsObjectId": "PLAZA_WALK_AROUND_BOT"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::23",
+                    "trophyId": "23",
+                    "udsObjectId": "LABO_PUNCH_AND_SPIN_PS2LOGO"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::25",
+                    "trophyId": "25",
+                    "udsObjectId": "LABO_LOOK_INTO_PSVR"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::26",
+                    "trophyId": "26",
+                    "udsObjectId": "LABO_RIDE_AIM_CONTROLLER"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::27",
+                    "trophyId": "27",
+                    "udsObjectId": "LABO_WALK_HOME_ICON"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::28",
+                    "trophyId": "28",
+                    "udsObjectId": "LABO_OPEN_PS1"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::29",
+                    "trophyId": "29",
+                    "udsObjectId": "COOLING_JUGGLE_BALL_WITH_FROG"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::30",
+                    "trophyId": "30",
+                    "udsObjectId": "COOLING_DIVED_FROM_DIVING_BOARD"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::31",
+                    "trophyId": "31",
+                    "udsObjectId": "COOLING_JUMP_IN_FOUNTAIN"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::32",
+                    "trophyId": "32",
+                    "udsObjectId": "COOLING_JUMP_ATTACK"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::33",
+                    "trophyId": "33",
+                    "udsObjectId": "MEMORY_AWAY_FROM_RAIN"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::34",
+                    "trophyId": "34",
+                    "udsObjectId": "MEMORY_HIT_FLYING_CAN"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::35",
+                    "trophyId": "35",
+                    "udsObjectId": "MEMORY_GOT_STRIKE"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::36",
+                    "trophyId": "36",
+                    "udsObjectId": "GPU_DEFLECT_SPTR_BLT_WITH_ARROW"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::37",
+                    "trophyId": "37",
+                    "udsObjectId": "GPU_MADE_HUGE_SNOWBALL"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::38",
+                    "trophyId": "38",
+                    "udsObjectId": "GPU_CATCH_THE_CLIFF_AFTER_FALL"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::39",
+                    "trophyId": "39",
+                    "udsObjectId": "GPU_HIT_RABBIT_WITH_ARROW"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::40",
+                    "trophyId": "40",
+                    "udsObjectId": "SSD_SPIN_WHILE_SHOOT_MACHINE_GUN"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::42",
+                    "trophyId": "42",
+                    "udsObjectId": "LABO_PUNCH_COMPANY_LOGO"
+                },
+                {
+                    "__typename": "TrophyInfoWithHintAvailable",
+                    "helpType": "HINT",
+                    "id": "NPWR20188_00::45",
+                    "trophyId": "45",
+                    "udsObjectId": "DAY1__GRAVITY_DAZE"
+                }
+            ]
+        }
+    }
+}
+```
+
+### Request `playstation.0.profile_remote_trophies.trophy_title`
+
+[Zusammenfassung](#zusammenfassung)</br>
+[Remote PSN Trophäen](#objekte-remote_trophies)
+
+```json
+{
+    "trophyTitles": [
+        {
+            "npServiceName": "trophy",
+            "npCommunicationId": "NPWR13511_00", // npCommunicationId
+            "trophySetVersion": "01.00",
+            "trophyTitleName": "Nidhogg 2",
+            "trophyTitleDetail": "Trophies for Nidhogg 2",
+            "trophyTitleIconUrl": "https://image.api.playstation.com/trophy/np/NPWR13511_00_00FFFxxxxx.PNG",
+            "trophyTitlePlatform": "PS4",
+            "hasTrophyGroups": false,
+            "trophyGroupCount": 1,
+            "definedTrophies": {
+                "bronze": 7,
+                "silver": 6,
+                "gold": 0,
+                "platinum": 0
+            },
+            "progress": 5,
+            "earnedTrophies": {
+                "bronze": 1,
+                "silver": 0,
+                "gold": 0,
+                "platinum": 0
+            },
+            "hiddenFlag": false,
+            "lastUpdatedDateTime": "2022-08-17T17:19:07Z"
+        }
+    ],
+    "nextOffset": 100,
+    "totalItemCount": 127
+}
+```
+
+### Request `playstation.0.profile_remote_trophies.trophy_all`
+
+[Zusammenfassung](#zusammenfassung)</br>
+[Remote PSN Trophäen](#objekte-remote_trophies)
 
 ```json
 [
@@ -656,10 +1528,10 @@ Bekannte paltform: PS5, PS4, PS3, PSVita
 ]
 ```
 
-### Request `playstation.0.profile_remote.trophies_for_title`
+### Request `playstation.0.profile_remote_trophies.trophies_for_title`
 
 [Zusammenfassung](#zusammenfassung)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN Trophäen](#objekte-remote_trophies)
 
 Bekannte groupid: VeryRare, UltraRare, Rare, Common, all</br>
 Bekannte paltform: PS5, PS4, PS3, PSVita
@@ -689,10 +1561,10 @@ Bekannte paltform: PS5, PS4, PS3, PSVita
 }
 ```
 
-### Request `playstation.0.profile_remote.trophies_earned_for_title`
+### Request `playstation.0.profile_remote_trophies.trophies_earned_for_title`
 
 [Zusammenfassung](#zusammenfassung)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN Trophäen](#objekte-remote_trophies)
 
 Bekannte groupid: VeryRare, UltraRare, Rare, Common, all</br>
 Bekannte paltform: PS5, PS4, PS3, PSVita
@@ -722,10 +1594,10 @@ Bekannte paltform: PS5, PS4, PS3, PSVita
 }
 ```
 
-### Request `playstation.0.profile_remote.gameList`
+### Request `playstation.0.profile_remote_profile.gameList`
 
 [Zusammenfassung](#zusammenfassung)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN Profil](#objekte-remote_profile)
 
 ```json
 {
@@ -944,10 +1816,10 @@ Bekannte paltform: PS5, PS4, PS3, PSVita
 }
 ```
 
-### Request `playstation.0.profile_remote.gameTitle`
+### Request `playstation.0.profile_remote_profile.gameTitle`
 
 [Zusammenfassung](#zusammenfassung)</br>
-[Remote PSN](#objekte-profile_remote)
+[Remote PSN Profil](#objekte-remote_profile)
 
 ```json
 [

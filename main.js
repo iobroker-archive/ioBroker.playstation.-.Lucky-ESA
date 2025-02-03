@@ -11,7 +11,9 @@ const axios = require("axios");
 const Json2iob = require("./lib/extractKeys");
 const tough = require("tough-cookie");
 const constants = require("./lib/constants");
-const requests = require("./lib/requests");
+const requests_trophy = require("./lib/requests_trophy");
+const requests_profile = require("./lib/requests_profile");
+const requests_group = require("./lib/requests_group");
 const { HttpsCookieAgent } = require("http-cookie-agent/http");
 const exec = util.promisify(require("node:child_process").exec);
 const path = require("node:path");
@@ -37,24 +39,36 @@ class Playstation extends utils.Adapter {
         this.createObjects = helper.createObjects;
         this.createDataPoint = helper.createDataPoint;
         this.createProfile = helper.createProfile;
-        this.gameList = requests.gameList;
-        this.updateProfile = requests.updateProfile;
-        this.loadAccount_id = requests.loadAccount_id;
-        this.loadOnline_id = requests.loadOnline_id;
-        this.loadTrophy_id = requests.loadTrophy_id;
-        this.loadRequest = requests.loadRequest;
-        this.trophyTitleGroup = requests.trophyTitleGroup;
-        this.trophyTitle = requests.trophyTitle;
-        this.trophyTitleUserGroup = requests.trophyTitleUserGroup;
-        this.trophiesTitle = requests.trophiesTitle;
-        this.trophiesEarnedTitle = requests.trophiesEarnedTitle;
-        this.gameTitle = requests.gameTitle;
-        this.loadReceivedRequests = requests.loadReceivedRequests;
-        this.getUniversalSearch = requests.getUniversalSearch;
-        this.getUniversalSearchPagination = requests.getUniversalSearchPagination;
-        this.getHintAvailability = requests.getHintAvailability;
-        this.getTips = requests.getTips;
-        this.lang = "de-de";
+        this.gameList = requests_profile.gameList;
+        this.updateProfile = requests_profile.updateProfile;
+        this.loadAccount_id = requests_profile.loadAccount_id;
+        this.loadOnline_id = requests_profile.loadOnline_id;
+        this.loadTrophy_id = requests_trophy.loadTrophy_id;
+        this.loadRequest = requests_profile.loadRequest;
+        this.trophyTitleGroup = requests_profile.trophyTitleGroup;
+        this.trophyTitle = requests_trophy.trophyTitle;
+        this.trophyTitleUserGroup = requests_trophy.trophyTitleUserGroup;
+        this.trophiesTitle = requests_trophy.trophiesTitle;
+        this.trophiesEarnedTitle = requests_trophy.trophiesEarnedTitle;
+        this.gameTitle = requests_profile.gameTitle;
+        this.loadReceivedRequests = requests_profile.loadReceivedRequests;
+        this.getUniversalSearch = requests_profile.getUniversalSearch;
+        this.getUniversalSearchPagination = requests_profile.getUniversalSearchPagination;
+        this.getHintAvailability = requests_trophy.getHintAvailability;
+        this.getTips = requests_trophy.getTips;
+        this.getStoreWishlist = requests_profile.getStoreWishlist;
+        this.getDeviceInfo = requests_profile.getDeviceInfo;
+        this.presencesUser = requests_profile.presencesUser;
+        this.allDocuments = requests_profile.allDocuments;
+        this.leaveGroup = requests_group.leaveGroup;
+        this.loadGroups = requests_group.loadGroups;
+        this.loadMessages = requests_group.loadMessages;
+        this.settingGroup = requests_group.settingGroup;
+        this.inviteMembers = requests_group.inviteMembers;
+        this.createGroup = requests_group.createGroup;
+        this.kickMember = requests_group.kickMember;
+        this.sendGroupMessage = requests_group.sendGroupMessage;
+        this.lang = "de";
         this.double_call = {};
         this.clients = {};
         this.session = {};
@@ -149,6 +163,10 @@ class Playstation extends utils.Adapter {
         this.subscribeStates("*");
         await this.checkDeviceFolder();
         this.setState("info.connection", { val: true, ack: true });
+        this.lang = constants.LANGUAGES[this.lang] != null ? constants.LANGUAGES[this.lang] : this.lang;
+        this.log.debug(`Languages: ${this.lang}`);
+        //this.getDeviceInfo(constants);
+        //this.allDocuments(constants);
     }
 
     forbidden_ip(ip) {
@@ -509,12 +527,12 @@ class Playstation extends utils.Adapter {
     onStateChange(id, state) {
         if (state && !state.ack) {
             const remote = id.split(".")[3];
+            const lastsplit = id.split(".").pop();
             if (remote === "remote") {
                 const device = id.split(".")[2];
                 if (this.clients[device] == null) {
                     return;
                 }
-                const lastsplit = id.split(".").pop();
                 switch (lastsplit) {
                     case "up":
                     case "down":
@@ -568,13 +586,109 @@ class Playstation extends utils.Adapter {
                         return;
                 }
             }
+            if (lastsplit === "limit" || lastsplit === "offset") {
+                this.setAckFlag(id);
+                return;
+            }
             const profile_remote = id.split(".")[2];
-            if (profile_remote === "profile_remote") {
+            if (profile_remote === "profile_remote_groups") {
+                switch (lastsplit) {
+                    case "loadGroups":
+                        this.loadGroups(constants, false);
+                        this.setAckFlag(id, { val: false });
+                        break;
+                    case "loadGroups_with_message":
+                        this.loadGroups(constants, true);
+                        this.setAckFlag(id, { val: false });
+                        break;
+                    case "selectGroup":
+                        this.loadMessages(state.val, constants, false);
+                        this.setAckFlag(id);
+                        break;
+                    case "groupSettings":
+                        this.settingGroup(state, constants);
+                        this.setAckFlag(id, { val: JSON.stringify({ groupName: { value: "group_name" } }) });
+                        break;
+                    case "inviteMembers":
+                        this.inviteMembers(state, constants);
+                        this.setAckFlag(id, { val: JSON.stringify(["0000000000000001", "0000000000000002"]) });
+                        break;
+                    case "createGroup":
+                        this.createGroup(state, constants);
+                        this.setAckFlag(id, { val: JSON.stringify(["0000000000000001", "0000000000000002"]) });
+                        break;
+                    case "kickMember":
+                        this.kickMember(state, constants);
+                        this.setAckFlag(id, { val: 0 });
+                        break;
+                    case "sendGroupMessage":
+                        this.sendGroupMessage(state, constants);
+                        this.setAckFlag(id, { val: "" });
+                        break;
+                    default:
+                        this.log.warn(`Command ${lastsplit} unknown`);
+                        break;
+                }
+            } else if (profile_remote === "profile_remote_trophies") {
+                switch (lastsplit) {
+                    case "trophy_all":
+                        this.loadTrophy_id(state.val, constants);
+                        this.setAckFlag(id, { val: "" });
+                        break;
+                    case "trophy_title":
+                        this.trophyTitle(state.val, constants);
+                        this.setAckFlag(id, { val: 0 });
+                        break;
+                    case "trophy_title_group":
+                        this.trophyTitleGroup(state.val, constants);
+                        this.setAckFlag(id, { val: JSON.stringify(["<npCommunicationId>", "<platform>"]) });
+                        break;
+                    case "trophy_title_group_user":
+                        this.trophyTitleUserGroup(state.val, constants);
+                        this.setAckFlag(id, {
+                            val: JSON.stringify(["<accountId>", "<npCommunicationId>", "<platform>"]),
+                        });
+                        break;
+                    case "trophies_for_title":
+                        this.trophiesTitle(state.val, constants);
+                        this.setAckFlag(id, {
+                            val: JSON.stringify(["<npCommunicationId>", "<groupId>", "<platform>"]),
+                        });
+                        break;
+                    case "trophies_earned_for_title":
+                        this.trophiesEarnedTitle(state.val, constants);
+                        this.setAckFlag(id, {
+                            val: JSON.stringify(["<accountId>", "<npCommunicationId>", "<groupId>", "<platform>"]),
+                        });
+                        break;
+                    case "trophies_game_help_available_for_title":
+                        this.getHintAvailability(state.val, constants);
+                        this.setAckFlag(id, { val: "" });
+                        break;
+                    case "trophies_game_help_for_title":
+                        this.getTips(state.val, constants);
+                        this.setAckFlag(id, {
+                            val: JSON.stringify(["<npCommunicationId>", "<trophyId>", "<udsObjectId>", "<helpType>"]),
+                        });
+                        break;
+                    default:
+                        this.log.warn(`Command ${lastsplit} unknown`);
+                        break;
+                }
+            } else if (profile_remote === "profile_remote_profile") {
                 const lastsplit = id.split(".").pop();
                 switch (lastsplit) {
                     case "update_profile":
                         this.updateProfile(constants, false);
                         this.setAckFlag(id, { val: false });
+                        break;
+                    case "leaveGroup":
+                        this.leaveGroup(constants);
+                        this.setAckFlag(id, { val: false });
+                        break;
+                    case "presencesUser":
+                        this.presencesUser(state.val, constants);
+                        this.setAckFlag(id, { val: 0 });
                         break;
                     case "online_with_name":
                         this.loadRequest("online", true, constants, false);
@@ -612,19 +726,12 @@ class Playstation extends utils.Adapter {
                         this.loadReceivedRequests(true, constants);
                         this.setAckFlag(id, { val: false });
                         break;
-                    case "limit":
-                        this.setAckFlag(id);
-                        break;
                     case "account_id":
                         this.loadAccount_id(state.val, constants);
                         this.setAckFlag(id, { val: 0 });
                         break;
                     case "online_id":
                         this.loadOnline_id(state.val, constants);
-                        this.setAckFlag(id, { val: "" });
-                        break;
-                    case "trophy_all":
-                        this.loadTrophy_id(state.val, constants);
                         this.setAckFlag(id, { val: "" });
                         break;
                     case "gameList":
@@ -634,32 +741,6 @@ class Playstation extends utils.Adapter {
                     case "gameTitle":
                         this.gameTitle(state.val, constants);
                         this.setAckFlag(id, { val: 0 });
-                        break;
-                    case "trophy_title":
-                        this.trophyTitle(state.val, constants);
-                        this.setAckFlag(id, { val: 0 });
-                        break;
-                    case "trophy_title_group":
-                        this.trophyTitleGroup(state.val, constants);
-                        this.setAckFlag(id, { val: JSON.stringify(["<npCommunicationId>", "<platform>"]) });
-                        break;
-                    case "trophy_title_group_user":
-                        this.trophyTitleUserGroup(state.val, constants);
-                        this.setAckFlag(id, {
-                            val: JSON.stringify(["<accountId>", "<npCommunicationId>", "<platform>"]),
-                        });
-                        break;
-                    case "trophies_for_title":
-                        this.trophiesTitle(state.val, constants);
-                        this.setAckFlag(id, {
-                            val: JSON.stringify(["<npCommunicationId>", "<groupId>", "<platform>"]),
-                        });
-                        break;
-                    case "trophies_earned_for_title":
-                        this.trophiesEarnedTitle(state.val, constants);
-                        this.setAckFlag(id, {
-                            val: JSON.stringify(["<accountId>", "<npCommunicationId>", "<groupId>", "<platform>"]),
-                        });
                         break;
                     case "search_user":
                         this.getUniversalSearch(state.val, "MobileUniversalSearchSocial", constants);
@@ -673,15 +754,9 @@ class Playstation extends utils.Adapter {
                         this.getUniversalSearchPagination(state.val, constants);
                         this.setAckFlag(id);
                         break;
-                    case "trophies_game_help_available_for_title":
-                        this.getHintAvailability(state.val, constants);
-                        this.setAckFlag(id, { val: "" });
-                        break;
-                    case "trophies_game_help_for_title":
-                        this.getTips(state.val, constants);
-                        this.setAckFlag(id, {
-                            val: JSON.stringify(["<npCommunicationId>", "<trophyId>", "<udsObjectId>", "<helpType>"]),
-                        });
+                    case "storeWishlist":
+                        this.getStoreWishlist(constants);
+                        this.setAckFlag(id, { val: false });
                         break;
                     default:
                         this.log.warn(`Command ${lastsplit} unknown`);
@@ -1146,6 +1221,13 @@ class Playstation extends utils.Adapter {
      */
     userCredential(accountId) {
         return createHash("sha256").update(accountId).digest("hex");
+    }
+
+    /**
+     * @param code npId
+     */
+    npIdDecode(code) {
+        return Buffer.from(code, "base64").toString("utf8");
     }
 }
 
