@@ -50,6 +50,7 @@
 - `2. Link to NPSSO (must be renewed every 2 months)` After logging in, click this link and copy the NPSSO cookie
 - `NPSSO cookie` Paste NPSSO cookie here
 - `Delete session data` If you have problems logging in, delete the current session
+- `Language` The language from the PSN account
 
 ![instance_tab_token.png](img/instance_tab_token.png)
 

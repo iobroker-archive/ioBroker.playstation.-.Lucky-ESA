@@ -50,6 +50,7 @@
 - `2. Link zu NPSSO (muss alle 2 Monate erneuert werden)` Nach dem Einloggen diesen Link anklicken und den NPSSO Cookie kopieren
 - `NPSSO-Cookie` NPSSO Cookie hier einfügen
 - `Sitzungsdaten löschen` Bei Login Probleme die aktuelle Session löschen
+- `Sprache` Die Sprache aus dem PSN-Konto
 
 ![instance_tab_token.png](img/instance_tab_token.png)
 
