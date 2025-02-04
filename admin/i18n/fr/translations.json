@@ -33,5 +33,7 @@
     "credentials": "Informations d'identification",
     "credentials_tooltip": "Données d'autorisation pour la Playstation (playactor)",
     "npsso": "Créer un cookie NPSSO",
-    "psn_account": "Créez d'abord un cookie NPSSO et enregistrez le paramètre d'instance"
+    "psn_account": "Créez d'abord un cookie NPSSO et enregistrez le paramètre d'instance",
+    "Language": "Langue",
+    "Language_tooltip": "La langue du compte PSN"
 }

@@ -22,6 +22,7 @@ const { homedir } = require("node:os");
 const PS4 = require("./lib/connection");
 const helper = require("./lib/helper");
 const { createHash } = require("node:crypto");
+const http = require("node:http");
 
 class Playstation extends utils.Adapter {
     /**
@@ -68,10 +69,12 @@ class Playstation extends utils.Adapter {
         this.createGroup = requests_group.createGroup;
         this.kickMember = requests_group.kickMember;
         this.sendGroupMessage = requests_group.sendGroupMessage;
-        this.lang = "de";
+        this.lang = "de-DE";
+        this.app_agent = "";
         this.double_call = {};
         this.clients = {};
         this.session = {};
+        this.getHeader = {};
         this.accountId = null;
         this.onlineId = null;
         this.intervalToken = null;
@@ -88,10 +91,13 @@ class Playstation extends utils.Adapter {
         this.requestClient = axios.create({
             withCredentials: true,
             timeout: 5000,
+            httpAgent: new http.Agent({ keepAlive: true }),
             httpsAgent: new HttpsCookieAgent({
                 cookies: {
                     jar: this.cookieJar,
                 },
+                keepAlive: true,
+                rejectUnauthorized: false,
             }),
         });
         this.json2iob = new Json2iob(this);
@@ -103,6 +109,20 @@ class Playstation extends utils.Adapter {
      */
     async onReady() {
         await this.setCredential();
+        this.app_agent = constants.APP_AGENT[Math.floor(Math.random() * constants.APP_AGENT.length)];
+        const lang = this.config.langPSN.split("-");
+        this.getHeader = {
+            headers: {
+                "User-Agent": this.app_agent,
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Accept-Encoding": "gzip, deflate",
+                Accept: "*/*",
+                Connection: "keep-alive",
+                Authorization: "",
+                "Accept-Language": `${this.config.langPSN},${lang[0]};q=0.9`,
+                Country: lang[1],
+            },
+        };
         if (this.config.npsso && this.config.npsso != "") {
             this.log.info(`NPSSO is available`);
             this.log.info(`Create profile objects`);
@@ -163,8 +183,6 @@ class Playstation extends utils.Adapter {
         this.subscribeStates("*");
         await this.checkDeviceFolder();
         this.setState("info.connection", { val: true, ack: true });
-        this.lang = constants.LANGUAGES[this.lang] != null ? constants.LANGUAGES[this.lang] : this.lang;
-        this.log.debug(`Languages: ${this.lang}`);
         //this.getDeviceInfo(constants);
         //this.allDocuments(constants);
     }
@@ -234,6 +252,7 @@ class Playstation extends utils.Adapter {
             this.session.access = requestToken;
             this.session.next = new Date().getTime() + parseInt(this.session.access.expires_in) * 1000;
             this.intervalToken && this.clearInterval(this.intervalToken);
+            this.getHeader.headers.Authorization = `Bearer ${this.session.access.access_token}`;
             this.setRefreshTokenInterval();
             this.log.debug(`this.session: ${JSON.stringify(this.session)}`);
             await this.setState("session", { val: this.encrypt(JSON.stringify(this.session)), ack: true });
@@ -377,6 +396,7 @@ class Playstation extends utils.Adapter {
             if (requestToken && requestToken.access_token) {
                 this.log.debug(`requestToken: ${JSON.stringify(requestToken)}`);
                 this.session.access = requestToken;
+                this.getHeader.headers.Authorization = `Bearer ${this.session.access.access_token}`;
                 this.session.next = new Date().getTime() + parseInt(this.session.access.expires_in) * 1000;
                 this.session.next_refresh =
                     new Date().getTime() + parseInt(this.session.access.refresh_token_expires_in) * 1000;
@@ -453,6 +473,7 @@ class Playstation extends utils.Adapter {
                     if (val && val.next > actual && val.next_refresh > actual) {
                         this.log.debug(`Use old session! - ${JSON.stringify(val)}`);
                         this.session = val;
+                        this.getHeader.headers.Authorization = `Bearer ${this.session.access.access_token}`;
                         return val.next - actual;
                     } else if (val && val.next_refresh < actual) {
                         this.log.debug(`Refresh token is expired! - ${JSON.stringify(val)}`);

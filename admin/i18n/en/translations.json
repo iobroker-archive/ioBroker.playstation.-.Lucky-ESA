@@ -33,5 +33,7 @@
     "credentials": "Credential",
     "credentials_tooltip": "Authorization data for the Playstation (playactor)",
     "npsso": "Create NPSSO Cookie",
-    "psn_account": "First create an NPSSO cookie and save the instance setting"
+    "psn_account": "First create an NPSSO cookie and save the instance setting",
+    "Language": "Language",
+    "Language_tooltip": "The language from the PSN account"
 }

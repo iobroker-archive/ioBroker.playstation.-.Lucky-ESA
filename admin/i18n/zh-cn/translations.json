@@ -33,5 +33,7 @@
     "credentials": "凭据",
     "credentials_tooltip": "Playstation (playactor) 的授权数据",
     "npsso": "创建 NPSSO Cookie",
-    "psn_account": "首先创建一个NPSSO cookie并保存实例设置"
+    "psn_account": "首先创建一个NPSSO cookie并保存实例设置",
+    "Language": "语言",
+    "Language_tooltip": "PSN帐户的语言"
 }

@@ -33,5 +33,7 @@
     "credentials": "Mandat",
     "credentials_tooltip": "Dane autoryzacyjne dla Playstation (playactor)",
     "npsso": "Utwórz plik cookie NPSSO",
-    "psn_account": "Najpierw utwórz plik cookie NPSSO i zapisz ustawienia instancji"
+    "psn_account": "Najpierw utwórz plik cookie NPSSO i zapisz ustawienia instancji",
+    "Language": "Język",
+    "Language_tooltip": "Język z konta PSN"
 }

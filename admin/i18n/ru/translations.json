@@ -33,5 +33,7 @@
     "credentials": "Полномочия",
     "credentials_tooltip": "Авторизационные данные для Playstation (актер)",
     "npsso": "Создать файл cookie NPSSO",
-    "psn_account": "Сначала создайте файл cookie NPSSO и сохраните настройки экземпляра."
+    "psn_account": "Сначала создайте файл cookie NPSSO и сохраните настройки экземпляра.",
+    "Language": "Язык",
+    "Language_tooltip": "Язык с учетной записи PSN"
 }

@@ -33,5 +33,7 @@
     "credentials": "Anmeldeinformation",
     "credentials_tooltip": "Berechtigungsdaten für die Playstation (Playactor)",
     "npsso": "Ein NPSSO-Cookie anlegen",
-    "psn_account": "Erstellen Sie zunächst ein NPSSO-Cookie und speichern Sie die Instanzeinstellung"
+    "psn_account": "Erstellen Sie zunächst ein NPSSO-Cookie und speichern Sie die Instanzeinstellung",
+    "Language": "Sprache",
+    "Language_tooltip": "Die Sprache aus dem PSN-Konto"
 }

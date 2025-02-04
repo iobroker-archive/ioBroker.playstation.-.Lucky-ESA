@@ -100,7 +100,8 @@
         "ps": [],
         "npsso": "",
         "selectPS4": "",
-        "psn": false
+        "psn": false,
+        "langPSN": "de-DE"
     },
     "objects": [],
     "instanceObjects": [

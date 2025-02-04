@@ -33,5 +33,7 @@
     "credentials": "Referentie",
     "credentials_tooltip": "Autorisatiegegevens voor de PlayStation (playactor)",
     "npsso": "NPSSO-cookie maken",
-    "psn_account": "Maak eerst een NPSSO-cookie en sla de instantie-instelling op"
+    "psn_account": "Maak eerst een NPSSO-cookie en sla de instantie-instelling op",
+    "Language": "Taal",
+    "Language_tooltip": "De taal van het PSN -account"
 }
