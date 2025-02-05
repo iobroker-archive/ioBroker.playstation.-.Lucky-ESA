@@ -84,8 +84,7 @@ You can wake up the Playstation or put it into standby mode. Some buttons are al
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 0.0.2 (2025-02-05)
 
 - (Lucky-ESA) Added groups and messages
 - (Lucky-ESA) Added: Share Profile
