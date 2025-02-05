@@ -88,6 +88,8 @@ You can wake up the Playstation or put it into standby mode. Some buttons are al
 ### **WORK IN PROGRESS**
 
 - (Lucky-ESA) Added groups and messages
+- (Lucky-ESA) Added: Share Profile
+- (Lucky-ESA) Load attachments from messages (raw data)
 
 ### 0.0.1 (2025-01-23)
 

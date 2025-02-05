@@ -61,6 +61,7 @@ class Playstation extends utils.Adapter {
         this.getDeviceInfo = requests_profile.getDeviceInfo;
         this.presencesUser = requests_profile.presencesUser;
         this.allDocuments = requests_profile.allDocuments;
+        this.shareProfile = requests_profile.shareProfile;
         this.leaveGroup = requests_group.leaveGroup;
         this.loadGroups = requests_group.loadGroups;
         this.loadMessages = requests_group.loadMessages;
@@ -69,6 +70,7 @@ class Playstation extends utils.Adapter {
         this.createGroup = requests_group.createGroup;
         this.kickMember = requests_group.kickMember;
         this.sendGroupMessage = requests_group.sendGroupMessage;
+        this.loadFileData = requests_group.loadFileData;
         this.lang = "de-DE";
         this.app_agent = "";
         this.double_call = {};
@@ -639,6 +641,10 @@ class Playstation extends utils.Adapter {
                         this.createGroup(state, constants);
                         this.setAckFlag(id, { val: JSON.stringify(["0000000000000001", "0000000000000002"]) });
                         break;
+                    case "loadFileData":
+                        this.loadFileData(state.val, constants);
+                        this.setAckFlag(id, { val: JSON.stringify(["<groupId>", "<resourceId>"]) });
+                        break;
                     case "kickMember":
                         this.kickMember(state, constants);
                         this.setAckFlag(id, { val: 0 });
@@ -779,6 +785,10 @@ class Playstation extends utils.Adapter {
                     case "storeWishlist":
                         this.getStoreWishlist(constants);
                         this.setAckFlag(id, { val: false });
+                        break;
+                    case "shareProfile":
+                        this.shareProfile(state.val, constants);
+                        this.setAckFlag(id, { val: 0 });
                         break;
                     default:
                         this.log.warn(`Command ${lastsplit} unknown`);
