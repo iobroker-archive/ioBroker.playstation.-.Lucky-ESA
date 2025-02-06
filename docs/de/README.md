@@ -209,10 +209,10 @@ Online-ID: Nickname
 
 | Objekt                                                      | Beschreibung                                                                                                                            | Link Beispiel                                                                 |
 | ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| playstation.0.profile_remote_groups.createGroup             | Eine Guppe mit Mitglieder erstellen (Account-ID der Mitglieder als Array)                                                               | Result unknown                                                                |
+| playstation.0.profile_remote_groups.createGroup             | Eine Guppe mit Mitglieder erstellen (Account-ID der Mitglieder als Array)                                                               | [Beispiel](#request-playstation0profile_remote_groupscreategroup)             |
 | playstation.0.profile_remote_groups.favorite                | Laden der Gruppen Favoriten/Keine Favoriten (alle)                                                                                      |                                                                               |
 | playstation.0.profile_remote_groups.fields                  | Welche Felder sollen geladen werden                                                                                                     |                                                                               |
-| playstation.0.profile_remote_groups.groupSettings           | Einstellung der Gruppe (Es muss eine Gruppe unter `selectGroup` ausgewählt werden)                                                      | Result unknown                                                                |
+| playstation.0.profile_remote_groups.groupSettings           | Einstellung der Gruppe (Es muss eine Gruppe unter `selectGroup` ausgewählt werden und 3 Mitglieder erforderlich)                        | Result unknown                                                                |
 | playstation.0.profile_remote_groups.inviteMembers           | Mitglieder in einer Gruppe hinzufügen (Account-ID der Mitglieder als Array - Es muss eine Gruppe unter `selectGroup` ausgewählt werden) | Result unknown                                                                |
 | playstation.0.profile_remote_groups.kickMember              | Ein Mitglied aus einer Gruppe mit der Account-ID entfernen (Es muss eine Gruppe unter `selectGroup` ausgewählt werden)                  | Result unknown                                                                |
 | playstation.0.profile_remote_groups.leaveGroup              | Eine Gruppe verlassen (Es muss eine Gruppe unter `selectGroup` ausgewählt werden)                                                       | Result unknown                                                                |
@@ -223,7 +223,7 @@ Online-ID: Nickname
 | playstation.0.profile_remote_groups.offset                  | Offset für das Laden von Gruppen                                                                                                        |                                                                               |
 | playstation.0.profile_remote_groups.result                  | Ergebnis von Gruppen oder Gruppen mit Nachrichten laden als JSON                                                                        |                                                                               |
 | playstation.0.profile_remote_groups.selectGroup             | Gruppen ID vom Ergebnis Gruppen oder Gruppen mit Nachrichten laden. Bei Auswahl einer Gruppe werden die Nachrichten geladen             | [Beispiel](#request-playstation0profile_remote_groupsselectgroup)             |
-| playstation.0.profile_remote_groups.sendGroupMessage        | Nachricht an eine ausgewählte Gruppe senden (Es muss eine Gruppe unter `selectGroup` ausgewählt werden)                                 | Result unknown                                                                |
+| playstation.0.profile_remote_groups.sendGroupMessage        | Nachricht an eine ausgewählte Gruppe senden (Es muss eine Gruppe unter `selectGroup` ausgewählt werden)                                 | [Beispiel](#request-playstation0profile_remote_groupssendgroupmessage)        |
 | playstation.0.profile_remote_groups.total                   | Anzahl aller möglichen Gruppen oder Nachrichten (wichtig für limit und offset)                                                          |                                                                               |
 
 ![objects_overview_remote_groups.png](img/objects_overview_remote_groups.png)
@@ -701,6 +701,33 @@ Online-ID: Nickname
         "reachedEndOfPage": true,
         "messageCount": 16
     }
+}
+```
+
+### Request `playstation.0.profile_remote_groups.sendGroupMessage`
+
+[Zusammenfassung](#zusammenfassung)</br>
+[Remote PSN Gruppen](#objekte-remote_groups)
+
+```json
+{
+    "messageUid": "1#445148311714496",
+    "createdTimestamp": "1738860592634"
+}
+```
+
+### Request `playstation.0.profile_remote_groups.createGroup`
+
+[Zusammenfassung](#zusammenfassung)</br>
+[Remote PSN Gruppen](#objekte-remote_groups)
+
+```json
+{
+    "groupId": "~335xxxxx.5B0B4EA11A655913",
+    "mainThread": {
+        "threadId": "~3357B7xxxxx.5B0B4EA11A655913"
+    },
+    "hasAllAccountInvited": true
 }
 ```
 
