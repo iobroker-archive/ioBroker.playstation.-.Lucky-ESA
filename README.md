@@ -88,6 +88,8 @@ You can wake up the Playstation or put it into standby mode. Some buttons are al
 ### **WORK IN PROGRESS**
 
 - (Lucky-ESA) Fixed bug when creating a group
+- (Lucky-ESA) Friendship request accept added
+- (Lucky-ESA) Friendship request reject added
 
 ### 0.0.2 (2025-02-05)
 

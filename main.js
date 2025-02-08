@@ -71,6 +71,8 @@ class Playstation extends utils.Adapter {
         this.kickMember = requests_group.kickMember;
         this.sendGroupMessage = requests_group.sendGroupMessage;
         this.loadFileData = requests_group.loadFileData;
+        this.receivedRequestsAccept = requests_profile.receivedRequestsAccept;
+        this.receivedRequestsReject = requests_profile.receivedRequestsReject;
         this.lang = "de-DE";
         this.app_agent = "";
         this.double_call = {};
@@ -185,8 +187,6 @@ class Playstation extends utils.Adapter {
         this.subscribeStates("*");
         await this.checkDeviceFolder();
         this.setState("info.connection", { val: true, ack: true });
-        //this.getDeviceInfo(constants);
-        //this.allDocuments(constants);
     }
 
     forbidden_ip(ip) {
@@ -431,6 +431,27 @@ class Playstation extends utils.Adapter {
                 if (viewError) {
                     this.log.error(error);
                     error.response && this.log.error(JSON.stringify(error.response.message));
+                    if (error.response) {
+                        if (error.response.status == 400) {
+                            this.log.error("Bad Requests");
+                        } else if (error.response.status == 401) {
+                            this.log.error("Unauthorized");
+                        } else if (error.response.status == 403) {
+                            this.log.error("Forbidden");
+                        } else if (error.response.status == 404) {
+                            this.log.error("Not Found");
+                        } else if (error.response.status == 405) {
+                            this.log.error("Not Allowed");
+                        } else if (error.response.status == 429) {
+                            this.log.error("Too Many Requests");
+                        } else if (error.response.status < 500) {
+                            this.log.error("Client Error");
+                        } else if (error.response.status >= 500) {
+                            this.log.error("Server Error");
+                        } else {
+                            this.log.error(error.response.status);
+                        }
+                    }
                 }
                 return error;
             });
@@ -753,6 +774,14 @@ class Playstation extends utils.Adapter {
                     case "received_requests_with_name":
                         this.loadReceivedRequests(true, constants);
                         this.setAckFlag(id, { val: false });
+                        break;
+                    case "received_requests_accept":
+                        this.receivedRequestsAccept(state.val, constants);
+                        this.setAckFlag(id, { val: 0 });
+                        break;
+                    case "received_requests_reject":
+                        this.receivedRequestsReject(state.val, constants);
+                        this.setAckFlag(id, { val: 0 });
                         break;
                     case "account_id":
                         this.loadAccount_id(state.val, constants);
