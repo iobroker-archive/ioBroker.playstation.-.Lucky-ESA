@@ -23,7 +23,19 @@ const PS4 = require("./lib/connection");
 const helper = require("./lib/helper");
 const { createHash } = require("node:crypto");
 const http = require("node:http");
-
+let status = {
+    countRequest: 0,
+    maxRequest: 600,
+    periode: 900000,
+    timestamp: 0,
+    timeISO: new Date(),
+    request: "",
+    lastRequest: new Date(),
+    npssoExired: 0,
+    npssoNew: 0,
+    error: "NoError",
+    lastError: new Date(),
+};
 class Playstation extends utils.Adapter {
     /**
      * @param {Partial<utils.AdapterOptions>} [options={}]
@@ -113,6 +125,11 @@ class Playstation extends utils.Adapter {
      */
     async onReady() {
         await this.setCredential();
+        const loadStatus = await this.getStateAsync("status");
+        if (loadStatus && typeof loadStatus.val === "string" && loadStatus.val.includes("countRequest")) {
+            status = JSON.parse(loadStatus.val);
+        }
+        let isOnline = true;
         this.app_agent = constants.APP_AGENT[Math.floor(Math.random() * constants.APP_AGENT.length)];
         const lang = this.config.langPSN.split("-");
         this.getHeader = {
@@ -138,6 +155,8 @@ class Playstation extends utils.Adapter {
                 if (login) {
                     this.setRefreshTokenInterval();
                     await this.updateProfile(constants, true);
+                } else {
+                    isOnline = false;
                 }
             } else if (nextStep === 1) {
                 this.refreshNewToken();
@@ -186,7 +205,9 @@ class Playstation extends utils.Adapter {
         }
         this.subscribeStates("*");
         await this.checkDeviceFolder();
-        this.setState("info.connection", { val: true, ack: true });
+        if (isOnline) {
+            this.setState("info.connection", { val: true, ack: true });
+        }
     }
 
     forbidden_ip(ip) {
@@ -224,6 +245,7 @@ class Playstation extends utils.Adapter {
             return false;
         }
         this.countRefreshLogin = 0;
+        await this.status(`${constants.BASE_PATH.base_uri}${constants.API_PATH.access_token}`);
         const requestToken = await this.requestClient({
             method: "post",
             url: `${constants.BASE_PATH.base_uri}${constants.API_PATH.access_token}`,
@@ -247,6 +269,9 @@ class Playstation extends utils.Adapter {
             .catch(error => {
                 this.log.error(error);
                 error.response && this.log.error(JSON.stringify(error.response.message));
+                status.error = JSON.stringify(error);
+                status.lastError = new Date();
+                this.setCounterStatus();
                 return null;
             });
         if (requestToken && requestToken.access_token) {
@@ -340,6 +365,7 @@ class Playstation extends utils.Adapter {
             response_type: "code",
             scope: "psn:mobile.v2.core psn:clientapp",
         }).toString();
+        await this.status(`${constants.BASE_PATH.base_uri}${constants.API_PATH.oauth_code}?${queryString}`);
         const requestCode = await this.requestClient({
             method: "get",
             url: `${constants.BASE_PATH.base_uri}${constants.API_PATH.oauth_code}?${queryString}`,
@@ -353,6 +379,9 @@ class Playstation extends utils.Adapter {
             })
             .catch(error => {
                 this.log.debug(error);
+                status.error = JSON.stringify(error);
+                status.lastError = new Date();
+                this.setCounterStatus();
                 if (error.response) {
                     return error.response.headers;
                 }
@@ -370,6 +399,7 @@ class Playstation extends utils.Adapter {
         const redirectParams = new URLSearchParams(redirectLocation.split("redirect/")[1]);
         const code = redirectParams.get("code");
         if (code) {
+            await this.status(`${constants.BASE_PATH.base_uri}${constants.API_PATH.access_token}`);
             const requestToken = await this.requestClient({
                 method: "post",
                 url: `${constants.BASE_PATH.base_uri}${constants.API_PATH.access_token}`,
@@ -393,6 +423,9 @@ class Playstation extends utils.Adapter {
                 .catch(error => {
                     this.log.error(error);
                     error.response && this.log.error(JSON.stringify(error.response.message));
+                    status.error = JSON.stringify(error);
+                    status.lastError = new Date();
+                    this.setCounterStatus();
                     return null;
                 });
             if (requestToken && requestToken.access_token) {
@@ -418,6 +451,9 @@ class Playstation extends utils.Adapter {
     }
 
     async requestPSN(methode, url, header, data, viewError) {
+        if (!(await this.status(url))) {
+            return;
+        }
         return await this.requestClient({
             method: methode,
             url: url,
@@ -453,6 +489,9 @@ class Playstation extends utils.Adapter {
                         }
                     }
                 }
+                status.error = JSON.stringify(error);
+                status.lastError = new Date();
+                this.setCounterStatus();
                 return error;
             });
     }
@@ -477,6 +516,8 @@ class Playstation extends utils.Adapter {
             if (obj.native && obj.native.npsso != "") {
                 if (obj.native.npsso != this.config.npsso) {
                     this.log.debug(`NPSSO has been changed!`);
+                    status.npssoNew = Date.now();
+                    this.setCounterStatus();
                     return 0;
                 }
             }
@@ -1289,6 +1330,40 @@ class Playstation extends utils.Adapter {
      */
     npIdDecode(code) {
         return Buffer.from(code, "base64").toString("utf8");
+    }
+
+    /**
+     * @param request url request
+     */
+    async status(request) {
+        const check_time = Date.now() - status.timestamp;
+        if (check_time < status.periode && status.countRequest > status.maxRequest) {
+            status.request = request;
+            status.lastRequest = new Date();
+            this.setCounterStatus();
+            return false;
+        }
+        if (check_time > status.periode) {
+            status.timestamp = Date.now();
+            status.timeISO = new Date();
+            status.countRequest = 1;
+            status.request = request;
+            status.lastRequest = new Date();
+            this.setCounterStatus();
+            return true;
+        }
+        ++status.countRequest;
+        status.request = request;
+        status.lastRequest = new Date();
+        this.setCounterStatus();
+        return true;
+    }
+
+    /**
+     * Save status JSON
+     */
+    async setCounterStatus() {
+        await this.setState("status", { val: JSON.stringify(status), ack: true });
     }
 }
 
