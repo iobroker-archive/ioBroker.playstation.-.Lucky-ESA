@@ -1337,9 +1337,9 @@ class Playstation extends utils.Adapter {
      */
     async status(request) {
         const check_time = Date.now() - status.timestamp;
+        status.request = request;
+        status.lastRequest = new Date();
         if (check_time < status.periode && status.countRequest > status.maxRequest) {
-            status.request = request;
-            status.lastRequest = new Date();
             this.setCounterStatus();
             return false;
         }
@@ -1347,14 +1347,10 @@ class Playstation extends utils.Adapter {
             status.timestamp = Date.now();
             status.timeISO = new Date();
             status.countRequest = 1;
-            status.request = request;
-            status.lastRequest = new Date();
             this.setCounterStatus();
             return true;
         }
         ++status.countRequest;
-        status.request = request;
-        status.lastRequest = new Date();
         this.setCounterStatus();
         return true;
     }
