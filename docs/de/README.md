@@ -21,6 +21,7 @@
     - [Remote PSN Trophäen](#objekte-remote_trophies)
     - [Remote PSN Gruppen](#objekte-remote_groups)
 - [Beispiele](#arrayjson-beispiele)
+- [Status Beschränkungen als JSON](#status-json)
 
 # Instanz Einstellungen
 
@@ -247,6 +248,26 @@ Online-ID: Nickname
 [Zusammenfassung](#zusammenfassung)
 
 ![objects_overview_device.png](img/objects_overview_device.png)
+
+# Status JSON
+
+[Zusammenfassung](#zusammenfassung)
+
+```json
+{
+    "countRequest": 5, // Counter Abfragen der letzten 15 Minuten
+    "maxRequest": 600, // Max. Anfragen pro 15 Minuten
+    "periode": 900000, // 15 Minuten timestamp
+    "timestamp": 1739475826546, // Start 15 Minuten Counter als timestamp
+    "timeISO": "2025-02-13T19:43:46.546Z", // Start 15 Minuten Counter als ISO
+    "request": "https://us-prof.np.community.playstation.net/userProfile/v1/users/Luna2008Lara/profile2", // Letzte GET/POST/PUT Request
+    "lastRequest": "2025-02-13T19:43:47.501Z", // Letzte Request als ISO
+    "npssoExired": 0, // NPSSO Token Ablaufdatum - Derzeit unbekannt
+    "npssoNew": 0, // Start NPSSO Token Erstellung. Dieser soll nur einige Monate gültig sein und muss manuell erneuert werden
+    "error": "NoError", // Letzte Fehlermeldung
+    "lastError": "2025-02-10T18:51:32.930Z" // Datum letzte Fehlermeldung als ISO
+}
+```
 
 # Array/JSON Beispiele
 

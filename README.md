@@ -38,10 +38,14 @@ You can wake up the Playstation or put it into standby mode. Some buttons are al
 - Search Games
 - Search Member
 - Groups/Messages
+- Send message (currently text message)
+- Load voice message
+- Accept friendship request
+- Reject friendship requests
+- Profile
 
 ### Currently not available:</br>
 
-- Load voice messages
 - Load images messages
 
 ### In progress
@@ -90,6 +94,9 @@ You can wake up the Playstation or put it into standby mode. Some buttons are al
 - (Lucky-ESA) Fixed bug when creating a group
 - (Lucky-ESA) Friendship request accept added
 - (Lucky-ESA) Friendship request reject added
+- (Lucky-ESA) Added loading voice data from a message
+- (Lucky-ESA) Added status restrictions as JSON
+- (Lucky-ESA) Added meta object for attachments from message
 
 ### 0.0.2 (2025-02-05)
 
