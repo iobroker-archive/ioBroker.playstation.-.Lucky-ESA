@@ -220,7 +220,7 @@ Online-ID: Nickname
 | playstation.0.profile_remote_groups.kickMember              | Ein Mitglied aus einer Gruppe mit der Account-ID entfernen (Es muss eine Gruppe unter `selectGroup` ausgewählt werden)                  | Result unknown                                                                |
 | playstation.0.profile_remote_groups.leaveGroup              | Eine Gruppe verlassen (Es muss eine Gruppe unter `selectGroup` ausgewählt werden)                                                       | Result unknown                                                                |
 | playstation.0.profile_remote_groups.limit                   | Limit für Gruppen oder Nachrichten die geladen werden sollen (siehe Beispiel unter Profil)                                              |                                                                               |
-| playstation.0.profile_remote_groups.loadFileData            | Aus Nachrichten die Anhänge laden                                                                                                       |                                                                               |
+| playstation.0.profile_remote_groups.loadFileData            | Aus Nachrichten die Anhänge laden                                                                                                       | [Beispiel](#request-playstation0profile_remote_groupsloadfiledata)            |
 | playstation.0.profile_remote_groups.loadGroups              | Gruppen laden                                                                                                                           | [Beispiel](#request-playstation0profile_remote_groupsloadgroups)              |
 | playstation.0.profile_remote_groups.loadGroups_with_message | Gruppen mit Nachrichten laden (siehe Beispiel unter Profil)                                                                             | [Beispiel](#request-playstation0profile_remote_groupsloadgroups_with_message) |
 | playstation.0.profile_remote_groups.offset                  | Offset für das Laden von Gruppen                                                                                                        |                                                                               |
@@ -366,6 +366,13 @@ Online-ID: Nickname
     }
 }
 ```
+
+### Request `playstation.0.profile_remote_groups.loadFileData`
+
+[Zusammenfassung](#zusammenfassung)</br>
+[Remote PSN Gruppen](#objekte-remote_groups)
+
+![objects_meta.png](img/objects_meta.png)
 
 ### Request `playstation.0.profile_remote_groups.loadGroups`
 

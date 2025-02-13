@@ -220,7 +220,7 @@ Online-ID: Nickname
 | playstation.0.profile_remote_groups.kickMember              | Remove a member from a group using Account ID (A group must be selected under `selectGroup`)               | Result unknown                                                               |
 | playstation.0.profile_remote_groups.leaveGroup              | Leaving a group (A group must be selected under `selectGroup`)                                             | Result unknown                                                               |
 | playstation.0.profile_remote_groups.limit                   | Limit for groups or messages that should be loaded (see example under profile)                             |                                                                              |
-| playstation.0.profile_remote_groups.loadFileData            | Load attachments from messages (raw data)                                                                  |                                                                              |
+| playstation.0.profile_remote_groups.loadFileData            | Load attachments from messages (raw data)                                                                  | [Example](#request-playstation0profile_remote_groupsloadfiledata)            |
 | playstation.0.profile_remote_groups.loadGroups              | Load groups                                                                                                | [Example](#request-playstation0profile_remote_groupsloadgroups)              |
 | playstation.0.profile_remote_groups.loadGroups_with_message | Load groups with messages (see example under profile)                                                      | [Example](#request-playstation0profile_remote_groupsloadgroups_with_message) |
 | playstation.0.profile_remote_groups.offset                  | Group loading offset                                                                                       |                                                                              |
@@ -366,6 +366,13 @@ Online-ID: Nickname
     }
 }
 ```
+
+### Request `playstation.0.profile_remote_groups.loadFileData`
+
+[Zusammenfassung](#zusammenfassung)</br>
+[Remote PSN Gruppen](#objekte-remote_groups)
+
+![objects_meta.png](img/objects_meta.png)
 
 ### Request `playstation.0.profile_remote_groups.loadGroups`
 
