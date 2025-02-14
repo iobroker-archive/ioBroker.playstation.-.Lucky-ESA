@@ -88,8 +88,7 @@ You can wake up the Playstation or put it into standby mode. Some buttons are al
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 0.0.3 (2025-02-14)
 
 - (Lucky-ESA) Fixed bug when creating a group
 - (Lucky-ESA) Friendship request accept added
