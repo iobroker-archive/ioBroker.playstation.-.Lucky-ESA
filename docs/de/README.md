@@ -372,6 +372,43 @@ Online-ID: Nickname
 [Zusammenfassung](#zusammenfassung)</br>
 [Remote PSN Gruppen](#objekte-remote_groups)
 
+- Messages
+
+```JSON
+{
+	"messageUid": "1#3981xxx8575",
+	"messageType": 1011,
+	"alternativeMessageType": 1,
+	"body": "",
+	"createdTimestamp": "1555180703000",
+	"sender": {
+		"accountId": "1126100000346479",
+		"onlineId": "username"
+	},
+	"messageDetail": {
+		"voiceMessageDetail": {
+			"resourceId": "3210FxxxBD2F.5B0B4xxx55913_message_3981xxx8575_1555180703978",
+			"playbackTime": 6
+		}
+	}
+}
+```
+
+```JSON
+{
+    "MessageType": {
+        "3": "Image",
+        "210": "Video",
+        "1011": "Audio",
+    }
+}
+```
+
+```JSON
+["<groupId>", "<resourceId>", "<messageType>", "<saveInMeta>"]</br>
+["~0FA0BD0F264CBD2F.5B0B4EA11A655913", "3210FxxxBD2F.5B0B4xxx55913_message_3981xxx8575_1555180703978", 1011, true] // true = Speichern in meta object (playstation.0)
+```
+
 ![objects_meta.png](img/objects_meta.png)
 
 ### Request `playstation.0.profile_remote_groups.loadGroups`

@@ -705,7 +705,9 @@ class Playstation extends utils.Adapter {
                         break;
                     case "loadFileData":
                         this.loadFileData(state.val, constants);
-                        this.setAckFlag(id, { val: JSON.stringify(["<groupId>", "<resourceId>"]) });
+                        this.setAckFlag(id, {
+                            val: JSON.stringify(["<groupId>", "<resourceId>", "<messageType>", "<saveInMeta>"]),
+                        });
                         break;
                     case "kickMember":
                         this.kickMember(state, constants);
