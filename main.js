@@ -14,6 +14,7 @@ const constants = require("./lib/constants");
 const requests_trophy = require("./lib/requests_trophy");
 const requests_profile = require("./lib/requests_profile");
 const requests_group = require("./lib/requests_group");
+const requests_star = require("./lib/requests_star");
 const { HttpsCookieAgent } = require("http-cookie-agent/http");
 const exec = util.promisify(require("node:child_process").exec);
 const path = require("node:path");
@@ -52,6 +53,7 @@ class Playstation extends utils.Adapter {
         this.createObjects = helper.createObjects;
         this.createDataPoint = helper.createDataPoint;
         this.createProfile = helper.createProfile;
+        this.createStar = helper.createStar;
         this.gameList = requests_profile.gameList;
         this.updateProfile = requests_profile.updateProfile;
         this.loadAccount_id = requests_profile.loadAccount_id;
@@ -85,6 +87,7 @@ class Playstation extends utils.Adapter {
         this.loadFileData = requests_group.loadFileData;
         this.receivedRequestsAccept = requests_profile.receivedRequestsAccept;
         this.receivedRequestsReject = requests_profile.receivedRequestsReject;
+        this.starRequest = requests_star.starRequest;
         this.lang = "de-DE";
         this.app_agent = "";
         this.double_call = {};
@@ -124,6 +127,7 @@ class Playstation extends utils.Adapter {
      *
      */
     async onReady() {
+        this.config.star = true;
         await this.setCredential();
         const loadStatus = await this.getStateAsync("status");
         if (loadStatus && typeof loadStatus.val === "string" && loadStatus.val.includes("countRequest")) {
@@ -166,6 +170,12 @@ class Playstation extends utils.Adapter {
                     this.refreshNewToken();
                 }, nextStep);
                 await this.updateProfile(constants, true);
+            }
+            if (this.config.star) {
+                this.log.info(`Create stars objects`);
+                this.createStar();
+            } else {
+                await this.delObjectAsync(`profile_remote_stars`, { recursive: true });
             }
         } else {
             this.log.info(`No NPSSO available`);
@@ -861,6 +871,112 @@ class Playstation extends utils.Adapter {
                     case "shareProfile":
                         this.shareProfile(state.val, constants);
                         this.setAckFlag(id, { val: 0 });
+                        break;
+                    default:
+                        this.log.warn(`Command ${lastsplit} unknown`);
+                        break;
+                }
+            } else if (profile_remote === "profile_remote_stars") {
+                const lastsplit = id.split(".").pop();
+                switch (lastsplit) {
+                    case "user_earned_collectibles":
+                        this.starRequest(
+                            constants.BASE_PATH.graph_ql,
+                            { includeDisplayItems: false },
+                            constants.hashMap.metGetUserCollectibles,
+                            constants.API_PATH.getUserCollectibles,
+                        );
+                        this.setAckFlag(id, { val: false });
+                        break;
+                    case "user_display_case":
+                        this.starRequest(
+                            constants.BASE_PATH.graph_ql,
+                            { accountId: "me" },
+                            constants.hashMap.metGetCollectibleDisplay,
+                            constants.API_PATH.getCollectibleDisplay,
+                        );
+                        this.setAckFlag(id, { val: false });
+                        break;
+                    case "user_history":
+                        this.starRequest(
+                            constants.BASE_PATH.graph_ql,
+                            null,
+                            constants.hashMap.metGetPointsHistory,
+                            constants.API_PATH.getPointsHistory,
+                        );
+                        this.setAckFlag(id, { val: false });
+                        break;
+                    case "user_summary":
+                        this.starRequest(
+                            constants.BASE_PATH.graph_ql,
+                            { accountId: "me" },
+                            constants.hashMap.metGetAccount,
+                            constants.API_PATH.getAccount,
+                        );
+                        this.setAckFlag(id, { val: false });
+                        break;
+                    case "rewards_tiers":
+                        this.starRequest(
+                            constants.BASE_PATH.graph_ql,
+                            null,
+                            constants.hashMap.metGetStatusLevels,
+                            constants.API_PATH.getStatusLevels,
+                        );
+                        this.setAckFlag(id, { val: false });
+                        break;
+                    case "display_cases":
+                        this.starRequest(
+                            constants.BASE_PATH.graph_ql,
+                            null,
+                            constants.hashMap.metGetCollectibleScenes,
+                            constants.API_PATH.getCollectibleScenes,
+                        );
+                        this.setAckFlag(id, { val: false });
+                        break;
+                    case "collectible_detail":
+                        this.starRequest(
+                            constants.BASE_PATH.graph_ql,
+                            { collectibleId: state.val, accountId: "me" },
+                            constants.hashMap.metLoyaltyGetOwnedCollectibleById,
+                            constants.API_PATH.getLoyaltyGetOwnedCollectibleById,
+                        );
+                        this.setAckFlag(id, { val: "" });
+                        break;
+                    case "rewards_detail":
+                        this.starRequest(
+                            constants.BASE_PATH.graph_ql,
+                            { id: state.val },
+                            constants.hashMap.metLoyaltyRewardbyId,
+                            constants.API_PATH.getLoyaltyRewardbyId,
+                        );
+                        this.setAckFlag(id, { val: "" });
+                        break;
+                    case "rewards":
+                        this.starRequest(
+                            constants.BASE_PATH.graph_ql,
+                            null,
+                            constants.hashMap.metGetRewardGroup,
+                            constants.API_PATH.getRewardGroup,
+                        );
+                        this.setAckFlag(id, { val: false });
+                        break;
+                    case "campaigns_detail":
+                        this.starRequest(
+                            constants.BASE_PATH.graph_ql,
+                            { campaignId: state.val },
+                            constants.hashMap.metLoyaltyCampaignByIdRetrieve,
+                            constants.API_PATH.getLoyaltyCampaignByIdRetrieve,
+                        );
+                        this.setAckFlag(id, { val: "" });
+                        break;
+                    case "campaigns":
+                        this.starRequest(
+                            constants.BASE_PATH.graph_ql,
+                            null,
+                            constants.hashMap.metGetCampaignGroup,
+                            constants.API_PATH.getCampaignGroup,
+                        );
+                        this.setAckFlag(id, { val: false });
                         break;
                     default:
                         this.log.warn(`Command ${lastsplit} unknown`);
