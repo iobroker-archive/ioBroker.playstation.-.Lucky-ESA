@@ -138,6 +138,18 @@
                         { "value": "zh-TW", "label": "zh-TW - 中文 (繁體)" }
                     ],
                     "default": "de-DE"
+                },
+                "star": {
+                    "type": "checkbox",
+                    "label": "active_star",
+                    "tooltip": "active_star_tooltip",
+                    "default": false,
+                    "newLine": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 }
             }
         },

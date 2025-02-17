@@ -35,5 +35,7 @@
     "npsso": "Ein NPSSO-Cookie anlegen",
     "psn_account": "Erstellen Sie zunächst ein NPSSO-Cookie und speichern Sie die Instanzeinstellung",
     "Language": "Sprache",
-    "Language_tooltip": "Die Sprache aus dem PSN-Konto"
+    "Language_tooltip": "Die Sprache aus dem PSN-Konto",
+    "active_star": "PlayStation Stars aktivieren",
+    "active_star_tooltip": "PlayStation Stars muss im Profil aktiviert werden"
 }

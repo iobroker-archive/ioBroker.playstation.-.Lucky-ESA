@@ -35,5 +35,7 @@
     "npsso": "创建 NPSSO Cookie",
     "psn_account": "首先创建一个NPSSO cookie并保存实例设置",
     "Language": "语言",
-    "Language_tooltip": "PSN帐户的语言"
+    "Language_tooltip": "PSN帐户的语言",
+    "active_star": "激活PlayStation星星",
+    "active_star_tooltip": "PlayStation Stars必须在个人资料中激活"
 }

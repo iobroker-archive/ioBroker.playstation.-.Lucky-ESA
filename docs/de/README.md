@@ -20,6 +20,8 @@
     - [Remote PSN Profil](#objekte-remote_profile)
     - [Remote PSN Trophäen](#objekte-remote_trophies)
     - [Remote PSN Gruppen](#objekte-remote_groups)
+    - [Remote PSN Stars](#objekte-remote_stars)
+    - [Remote PSN Store](#objekte-remote_store)
 - [Beispiele](#arrayjson-beispiele)
 - [Status Beschränkungen als JSON](#status-json)
 
@@ -52,6 +54,7 @@
 - `NPSSO-Cookie` NPSSO Cookie hier einfügen
 - `Sitzungsdaten löschen` Bei Login Probleme die aktuelle Session löschen
 - `Sprache` Die Sprache aus dem PSN-Konto
+- `PlayStation Stars aktivieren` Remote Control Objekte für Playstation Stars anlegen (Muss im PS Profil aktiviert werden)
 
 ![instance_tab_token.png](img/instance_tab_token.png)
 
@@ -181,7 +184,8 @@ Freundeliste laden (es gibt 59 Freunde - limit max. 800)</br>
 - offset 59 // Startet bei 59
 - Ergebnis: Die Liste ist dann leer
 
-![objects_overview_remote_profile.png](img/objects_overview_remote_profile.png)
+![objects_overview_remote_profile.png](img/objects_overview_remote_profile.png)</br>
+![objects_overview_remote_profile_2.png](img/objects_overview_remote_profile_2.png)
 
 ### Objekte remote_trophies
 
@@ -230,6 +234,57 @@ Online-ID: Nickname
 | playstation.0.profile_remote_groups.total                   | Anzahl aller möglichen Gruppen oder Nachrichten (wichtig für limit und offset)                                                          |                                                                               |
 
 ![objects_overview_remote_groups.png](img/objects_overview_remote_groups.png)
+
+### Objekte remote_stars
+
+[Zusammenfassung](#zusammenfassung)
+
+campaign-ID: Von `profile_remote_stars.campaigns`
+collectible-ID: Von `profile_remote_stars.campaigns`
+reward-ID: Von `profile_remote_stars.rewards`
+
+| Objekt                                                      | Beschreibung                                               | Link Beispiel |
+| ----------------------------------------------------------- | ---------------------------------------------------------- | ------------- |
+| playstation.0.profile_remote_stars.campaigns                | Verfügbare Kampagnen                                       |               |
+| playstation.0.profile_remote_stars.campaigns_detail         | Details einer bestimmten Kampagne                          |               |
+| playstation.0.profile_remote_stars.collectible_detail       | Details zu einem bestimmten Sammlerstück                   |               |
+| playstation.0.profile_remote_stars.display_cases            | Verfügbare Vitrinen (oder Szenen)                          |               |
+| playstation.0.profile_remote_stars.result                   | Ergebnis aller Abfragen                                    |               |
+| playstation.0.profile_remote_stars.rewards                  | Prämien für den Umtausch gegen gesammelte Punkte           |               |
+| playstation.0.profile_remote_stars.rewards_detail           | Details zu einer bestimmten Belohnung reward               |               |
+| playstation.0.profile_remote_stars.rewards_tiers            | Prämienstufen, die innerhalb des Dienstes vorhanden sind   |               |
+| playstation.0.profile_remote_stars.user_display_case        | Vitrine eines Benutzers mit Sammlerstücken                 |               |
+| playstation.0.profile_remote_stars.user_earned_collectibles | Sammlerstücke, die ein Benutzer verdient hat               |               |
+| playstation.0.profile_remote_stars.user_history             | Eine Zusammenfassung der Prämienpunkte                     |               |
+| playstation.0.profile_remote_stars.user_summary             | Eine Zusammenfassung der PlayStation Stars eines Benutzers |               |
+
+![objects_overview_remote_stars.png](img/objects_overview_remote_stars.png)
+
+### Objekte remote_store
+
+[Zusammenfassung](#zusammenfassung)
+
+conncept-ID: Von `profile_remote_store.products`
+product-ID: Von `profile_remote_store.products`
+title-ID (npTitleId): Von `profile_remote_store.products`
+
+| Objekt                                                    | Beschreibung                                           | Link Beispiel                                                         |
+| --------------------------------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------- |
+| playstation.0.profile_remote_store.addons_with_titleId    | Addons mit der title-id                                |                                                                       |
+| playstation.0.profile_remote_store.concept_with_conceptId | Konzept mit der conncept-id                            |                                                                       |
+| playstation.0.profile_remote_store.concept_with_productId | Konzept mit der product-id                             |                                                                       |
+| playstation.0.profile_remote_store.featuresRetrieve       | PSPlus Abos                                            | [Beispiel](#request-playstation0profile_remote_storefeaturesretrieve) |
+| playstation.0.profile_remote_store.param                  | Parameter für alle Produkte                            | [Beispiel](#parameter)                                                |
+| playstation.0.profile_remote_store.pricing_with_conceptId | Preisgestaltung mit der conncept-id                    |                                                                       |
+| playstation.0.profile_remote_store.product_with_productId | Produkt mit der product-id                             |                                                                       |
+| playstation.0.profile_remote_store.products               | Alle Produkte (param und selectCategory wird benötigt) |                                                                       |
+| playstation.0.profile_remote_store.rating_with_conceptId  | Bewertung mit der conncept-id                          |                                                                       |
+| playstation.0.profile_remote_store.rating_with_productId  | Bewertung mit der produkt-id                           |                                                                       |
+| playstation.0.profile_remote_store.result                 | Ergebnis aller Anfragen                                |                                                                       |
+| playstation.0.profile_remote_store.selectCategory         | Parameter für alle Produkte                            |                                                                       |
+| playstation.0.profile_remote_store.total                  | Seitenanzahl aller Produkte                            |                                                                       |
+
+![objects_overview_remote_stars.png](img/objects_overview_remote_stars.png)
 
 ### Übersicht alle Objekte
 
@@ -363,6 +418,121 @@ Online-ID: Nickname
         "consoleAvailability": {
             "availabilityStatus": "offline"
         }
+    }
+}
+```
+
+### Parameter
+
+[Zusammenfassung](#zusammenfassung)</br>
+[Remote PSN Profil](#objekte-remote_store)
+
+Erst `playstation.0.profile_remote_store.products` aufrufen und aus dem JSON diesen Filter füllen. Danach erneut den Button `playstation.0.profile_remote_store.products` drücken
+
+```json
+{
+    "pageArgs": {
+        "size": 24, // Anzahl - Wie limit und offset
+        "offset": 0 // Start - Wie limit und offset
+    },
+    "sortBy": null,
+    "filterBy": ["storeDisplayClassification:PREMIUM_EDITION"],
+    "facetOptions": []
+}
+```
+
+### Request `playstation.0.profile_remote_store.featuresRetrieve`
+
+[Zusammenfassung](#zusammenfassung)</br>
+[Remote PSN Profil](#objekte-remote_store)
+
+```json
+{
+    "tierSelectorOffersRetrieve": {
+        "__typename": "SubscriptionOffers",
+        "offers": [
+            {
+                "__typename": "SubscriptionOffer",
+                "ctaLabel": "In den Einkaufswagen",
+                "description": "Du zahlst monatlich. Das Abonnement läuft unbefristet, bis es gekündigt wird.",
+                "hasPromotionOffer": false,
+                "isActiveSubscription": false,
+                "isTrial": false,
+                "legalText": "Näheres zu Preisänderungen und zur Kündigung findest du in den <a href=\"https://www.playstation.com/legal/ps-plus-usage-terms/\" data-label=\"usageTerms\" target=\"_blank\">Nutzungsbedingungen</a>.",
+                "nextRenewalDate": "17.3.2025",
+                "price": {
+                    "__typename": "SubscriptionPrice",
+                    "basePrice": "€8,99",
+                    "basePriceValue": 899,
+                    "currencyCode": "EUR",
+                    "discountText": "",
+                    "discountType": "DISCOUNT_TYPE_DEFAULT",
+                    "discountedPrice": "€8,99",
+                    "discountedValue": 899,
+                    "isFree": false,
+                    "promotionEndDate": null,
+                    "promotionStartDate": null
+                },
+                "skuId": "IP9102-PPSA06902_00-PLUS1T01M0000000-E002",
+                "subscriptionDuration": "Monatsabonnement",
+                "title": "1-Monats-Abonnement",
+                "type": "SUBSCRIBE"
+            },
+            {
+                "__typename": "SubscriptionOffer",
+                "ctaLabel": "In den Einkaufswagen",
+                "description": "Du zahlst alle 3 Monate. Das Abonnement läuft unbefristet, bis es gekündigt wird.",
+                "hasPromotionOffer": false,
+                "isActiveSubscription": false,
+                "isTrial": false,
+                "legalText": "Näheres zu Preisänderungen und zur Kündigung findest du in den <a href=\"https://www.playstation.com/legal/ps-plus-usage-terms/\" data-label=\"usageTerms\" target=\"_blank\">Nutzungsbedingungen</a>.",
+                "nextRenewalDate": "17.5.2025",
+                "price": {
+                    "__typename": "SubscriptionPrice",
+                    "basePrice": "€24,99",
+                    "basePriceValue": 2499,
+                    "currencyCode": "EUR",
+                    "discountText": "",
+                    "discountType": "DISCOUNT_TYPE_DEFAULT",
+                    "discountedPrice": "€24,99",
+                    "discountedValue": 2499,
+                    "isFree": false,
+                    "promotionEndDate": null,
+                    "promotionStartDate": null
+                },
+                "skuId": "IP9102-PPSA06902_00-PLUS1T03M0000000-E002",
+                "subscriptionDuration": "3-Monats-Abonnement",
+                "title": "3-Monats-Abonnement",
+                "type": "SUBSCRIBE"
+            },
+            {
+                "__typename": "SubscriptionOffer",
+                "ctaLabel": "In den Einkaufswagen",
+                "description": "Du zahlst alle 12 Monate. Das Abonnement läuft unbefristet, bis es gekündigt wird.",
+                "hasPromotionOffer": false,
+                "isActiveSubscription": false,
+                "isTrial": false,
+                "legalText": "Näheres zu Preisänderungen und zur Kündigung findest du in den <a href=\"https://www.playstation.com/legal/ps-plus-usage-terms/\" data-label=\"usageTerms\" target=\"_blank\">Nutzungsbedingungen</a>.",
+                "nextRenewalDate": "17.2.2026",
+                "price": {
+                    "__typename": "SubscriptionPrice",
+                    "basePrice": "€71,99",
+                    "basePriceValue": 7199,
+                    "currencyCode": "EUR",
+                    "discountText": "",
+                    "discountType": "DISCOUNT_TYPE_DEFAULT",
+                    "discountedPrice": "€71,99",
+                    "discountedValue": 7199,
+                    "isFree": false,
+                    "promotionEndDate": null,
+                    "promotionStartDate": null
+                },
+                "skuId": "IP9102-PPSA06902_00-PLUS1T12M0000000-E002",
+                "subscriptionDuration": "12-Monats-Abonnement",
+                "title": "12-Monats-Abonnement",
+                "type": "SUBSCRIBE"
+            }
+        ]
     }
 }
 ```

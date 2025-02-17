@@ -15,6 +15,7 @@ const requests_trophy = require("./lib/requests_trophy");
 const requests_profile = require("./lib/requests_profile");
 const requests_group = require("./lib/requests_group");
 const requests_star = require("./lib/requests_star");
+const requests_store = require("./lib/requests_store");
 const { HttpsCookieAgent } = require("http-cookie-agent/http");
 const exec = util.promisify(require("node:child_process").exec);
 const path = require("node:path");
@@ -54,6 +55,7 @@ class Playstation extends utils.Adapter {
         this.createDataPoint = helper.createDataPoint;
         this.createProfile = helper.createProfile;
         this.createStar = helper.createStar;
+        this.createStore = helper.createStore;
         this.gameList = requests_profile.gameList;
         this.updateProfile = requests_profile.updateProfile;
         this.loadAccount_id = requests_profile.loadAccount_id;
@@ -88,6 +90,11 @@ class Playstation extends utils.Adapter {
         this.receivedRequestsAccept = requests_profile.receivedRequestsAccept;
         this.receivedRequestsReject = requests_profile.receivedRequestsReject;
         this.starRequest = requests_star.starRequest;
+        this.featuresRetrieve = requests_store.getFeaturesRetrieve;
+        this.getWithProductId = requests_store.getWithProductId;
+        this.getProducts = requests_store.getProducts;
+        this.getWithConceptId = requests_store.getWithConceptId;
+        this.getWithTitleId = requests_store.getWithTitleId;
         this.lang = "de-DE";
         this.app_agent = "";
         this.double_call = {};
@@ -127,7 +134,6 @@ class Playstation extends utils.Adapter {
      *
      */
     async onReady() {
-        this.config.star = true;
         await this.setCredential();
         const loadStatus = await this.getStateAsync("status");
         if (loadStatus && typeof loadStatus.val === "string" && loadStatus.val.includes("countRequest")) {
@@ -171,6 +177,8 @@ class Playstation extends utils.Adapter {
                 }, nextStep);
                 await this.updateProfile(constants, true);
             }
+            this.log.info(`Create store objects`);
+            await this.createStore();
             if (this.config.star) {
                 this.log.info(`Create stars objects`);
                 this.createStar();
@@ -982,6 +990,87 @@ class Playstation extends utils.Adapter {
                         this.log.warn(`Command ${lastsplit} unknown`);
                         break;
                 }
+            } else if (profile_remote === "profile_remote_store") {
+                const lastsplit = id.split(".").pop();
+                switch (lastsplit) {
+                    case "addons_with_titleId":
+                        this.getWithTitleId(
+                            state,
+                            constants.hashMap.metGetAddOnsByTitleId,
+                            constants.API_PATH.getAddOnsByTitleId,
+                            constants.BASE_PATH.graph1_ql,
+                        );
+                        this.setAckFlag(id, { val: "" });
+                        break;
+                    case "rating_with_conceptId":
+                        this.getWithConceptId(
+                            state,
+                            constants.hashMap.wcaConceptStarRatingRetrive,
+                            constants.API_PATH.getWcaConceptStarRatingRetrive,
+                            constants.BASE_PATH.graph1_ql,
+                        );
+                        this.setAckFlag(id, { val: "0" });
+                        break;
+                    case "rating_with_productId":
+                        this.getWithProductId(
+                            state,
+                            constants.hashMap.wcaProductStarRatingRetrive,
+                            constants.API_PATH.getWcaProductStarRatingRetrive,
+                            constants.BASE_PATH.graph1_ql,
+                        );
+                        this.setAckFlag(id, { val: "" });
+                        break;
+                    case "pricing_with_conceptId":
+                        this.getWithConceptId(
+                            state,
+                            constants.hashMap.metGetPricingDataByConceptId,
+                            constants.API_PATH.getPricingDataByConceptId,
+                            constants.BASE_PATH.graph1_ql,
+                        );
+                        this.setAckFlag(id, { val: "0" });
+                        break;
+                    case "concept_with_productId":
+                        this.getWithProductId(
+                            state,
+                            constants.hashMap.metGetConceptByProductIdQuery,
+                            constants.API_PATH.getConceptByProductIdQuery,
+                            constants.BASE_PATH.graph1_ql,
+                        );
+                        this.setAckFlag(id, { val: "" });
+                        break;
+                    case "concept_with_conceptId":
+                        this.getWithConceptId(
+                            state,
+                            constants.hashMap.metGetConceptById,
+                            constants.API_PATH.getConceptById,
+                            constants.BASE_PATH.graph1_ql,
+                        );
+                        this.setAckFlag(id, { val: "0" });
+                        break;
+                    case "products":
+                        this.getProducts(state, constants);
+                        this.setAckFlag(id, { val: false });
+                        break;
+                    case "product_with_productId":
+                        this.getWithProductId(
+                            state,
+                            constants.hashMap.metGetProductById,
+                            constants.API_PATH.getProductById,
+                            constants.BASE_PATH.graph1_ql,
+                        );
+                        this.setAckFlag(id, { val: "" });
+                        break;
+                    case "param":
+                        this.setAckFlag(id);
+                        break;
+                    case "featuresRetrieve":
+                        this.featuresRetrieve(state, constants);
+                        this.setAckFlag(id);
+                        break;
+                    default:
+                        this.log.warn(`Command ${lastsplit} unknown`);
+                        break;
+                }
             }
         }
     }
@@ -1478,6 +1567,19 @@ class Playstation extends utils.Adapter {
      */
     async setCounterStatus() {
         await this.setState("status", { val: JSON.stringify(status), ack: true });
+    }
+
+    async getParameter() {
+        const parameter = await this.getStateAsync(`profile_remote_store.param`);
+        if (!parameter || !parameter.val) {
+            return {
+                pageArgs: { size: 24, offset: 0 },
+                sortBy: null,
+                filterBy: [],
+                facetOptions: [],
+            };
+        }
+        return typeof parameter.val === "string" ? JSON.parse(parameter.val) : parameter.val;
     }
 }
 

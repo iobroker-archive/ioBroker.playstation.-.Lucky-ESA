@@ -35,5 +35,7 @@
     "npsso": "NPSSO-cookie maken",
     "psn_account": "Maak eerst een NPSSO-cookie en sla de instantie-instelling op",
     "Language": "Taal",
-    "Language_tooltip": "De taal van het PSN -account"
+    "Language_tooltip": "De taal van het PSN -account",
+    "active_star": "Activeer PlayStation Stars",
+    "active_star_tooltip": "PlayStation -sterren moeten in het profiel worden geactiveerd"
 }

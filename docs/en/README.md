@@ -20,6 +20,8 @@
     - [Remote PSN Profile](#objects-remote_profile)
     - [Remote PSN Trophies](#objects-remote_trophies)
     - [Remote PSN Groups](#objects-remote_groups)
+    - [Remote PSN Stars](#objects-remote_stars)
+    - [Remote PSN Store](#objects-remote_store)
 - [Example](#example-arrayjson)
 - [Status restrictions as JSON](#status-json)
 
@@ -52,6 +54,7 @@
 - `NPSSO cookie` Paste NPSSO cookie here
 - `Delete session data` If you have problems logging in, delete the current session
 - `Language` The language from the PSN account
+- `Activate Playstation Stars` Create remote control objects for Playstation Stars (Must be activated in the PS profile)
 
 ![instance_tab_token.png](img/instance_tab_token.png)
 
@@ -181,7 +184,8 @@ Load friends list (there are 59 friends - limit max. 800)
 - offset 59 // Starts at 59
 - Result: The list is then empty
 
-![objects_overview_remote_profile.png](img/objects_overview_remote_profile.png)
+![objects_overview_remote_profile.png](img/objects_overview_remote_profile.png)</br>
+![objects_overview_remote_profile_2.png](img/objects_overview_remote_profile_2.png)
 
 ### Objects remote_trophies
 
@@ -230,6 +234,57 @@ Online-ID: Nickname
 | playstation.0.profile_remote_groups.total                   | Number of all possible groups or messages (important for limit and offset)                                 |                                                                              |
 
 ![objects_overview_remote_groups.png](img/objects_overview_remote_groups.png)
+
+### Objects remote_stars
+
+[Summary](#summary)
+
+campaign-ID: From `profile_remote_stars.campaigns`
+collectible-ID: From `profile_remote_stars.campaigns`
+reward-ID: From `profile_remote_stars.rewards`
+
+| Object                                                      | Description                                | Example |
+| ----------------------------------------------------------- | ------------------------------------------ | ------- |
+| playstation.0.profile_remote_stars.campaigns                | Campaigns which are available              |         |
+| playstation.0.profile_remote_stars.campaigns_detail         | Details of a specific campaign             |         |
+| playstation.0.profile_remote_stars.collectible_detail       | Details of a specific collectible          |         |
+| playstation.0.profile_remote_stars.display_cases            | Available display cases (or scenes)        |         |
+| playstation.0.profile_remote_stars.result                   | Result of all queries                      |         |
+| playstation.0.profile_remote_stars.rewards                  | Rewards for exchange for points earned     |         |
+| playstation.0.profile_remote_stars.rewards_detail           | Details of a specific                      |         |
+| playstation.0.profile_remote_stars.rewards_tiers            | Reward tiers that exist within the service |         |
+| playstation.0.profile_remote_stars.user_display_case        | Collectibles display case                  |         |
+| playstation.0.profile_remote_stars.user_earned_collectibles | Collectibles that a user has earned        |         |
+| playstation.0.profile_remote_stars.user_history             | A summary of the reward points             |         |
+| playstation.0.profile_remote_stars.user_summary             | A summary of a users PlayStation Stars     |         |
+
+![objects_overview_remote_stars.png](img/objects_overview_remote_stars.png)
+
+### Objects remote_store
+
+[Summary](#summary)
+
+conncept-ID: From `profile_remote_store.products`
+product-ID: From `profile_remote_store.products`
+title-ID (npTitleId): From `profile_remote_store.products`
+
+| Object                                                    | Description                                         | Example                                                              |
+| --------------------------------------------------------- | --------------------------------------------------- | -------------------------------------------------------------------- |
+| playstation.0.profile_remote_store.addons_with_titleId    | Addons with title-id                                |                                                                      |
+| playstation.0.profile_remote_store.concept_with_conceptId | Conncept with conncept-id                           |                                                                      |
+| playstation.0.profile_remote_store.concept_with_productId | Conncept with product-id                            |                                                                      |
+| playstation.0.profile_remote_store.featuresRetrieve       | PSPlus subscriptions                                |                                                                      |
+| playstation.0.profile_remote_store.param                  | Parameter                                           | [Example](#request-playstation0profile_remote_storefeaturesretrieve) |
+| playstation.0.profile_remote_store.pricing_with_conceptId | Pricing with conncept-id                            |                                                                      |
+| playstation.0.profile_remote_store.product_with_productId | Product with product-id                             |                                                                      |
+| playstation.0.profile_remote_store.products               | All products (param and selectCategory is required) |                                                                      |
+| playstation.0.profile_remote_store.rating_with_conceptId  | Rating with conncept-id                             |                                                                      |
+| playstation.0.profile_remote_store.rating_with_productId  | Rating with product-id                              |                                                                      |
+| playstation.0.profile_remote_store.result                 | Result of all queries                               |                                                                      |
+| playstation.0.profile_remote_store.selectCategory         | Parameters for all products                         |                                                                      |
+| playstation.0.profile_remote_store.total                  | Number of pages of all products                     |                                                                      |
+
+![objects_overview_remote_stars.png](img/objects_overview_remote_stars.png)
 
 ### Overview all objects
 

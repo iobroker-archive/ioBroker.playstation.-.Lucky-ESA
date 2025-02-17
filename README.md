@@ -42,6 +42,8 @@ You can wake up the Playstation or put it into standby mode. Some buttons are al
 - Load voice message
 - Accept friendship request
 - Reject friendship requests
+- Requests PS Stars
+- Requests PS Store
 - Profile
 
 ### Currently not available:</br>
@@ -88,6 +90,12 @@ You can wake up the Playstation or put it into standby mode. Some buttons are al
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+
+- (Lucky-ESA) Added Playstation Stars
+- (Lucky-ESA) Added Playstation Store
+
 ### 0.0.3 (2025-02-14)
 
 - (Lucky-ESA) Fixed bug when creating a group

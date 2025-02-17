@@ -69,8 +69,14 @@
             "uk": "Пульт дистанційного керування PS",
             "zh-cn": "PS遥控器"
         },
-        "authors": ["Lucky-ESA <github@luckyskills.de>"],
-        "keywords": ["ps4", "ps5", "playstation"],
+        "authors": [
+            "Lucky-ESA <github@luckyskills.de>"
+        ],
+        "keywords": [
+            "ps4",
+            "ps5",
+            "playstation"
+        ],
         "licenseInformation": {
             "type": "free",
             "license": "MIT"
@@ -92,8 +98,12 @@
             "config": "json"
         },
         "docs": {
-            "en": ["docs/en/README.md"],
-            "de": ["docs/de/README.md"]
+            "en": [
+                "docs/en/README.md"
+            ],
+            "de": [
+                "docs/de/README.md"
+            ]
         },
         "dependencies": [
             {
@@ -106,8 +116,12 @@
             }
         ]
     },
-    "encryptedNative": ["npsso"],
-    "protectedNative": ["npsso"],
+    "encryptedNative": [
+        "npsso"
+    ],
+    "protectedNative": [
+        "npsso"
+    ],
     "native": {
         "ps": [],
         "npsso": "",
