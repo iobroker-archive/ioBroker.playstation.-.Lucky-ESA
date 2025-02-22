@@ -486,26 +486,11 @@ class Playstation extends utils.Adapter {
                 if (viewError) {
                     this.log.error(error);
                     error.response && this.log.error(JSON.stringify(error.response.message));
-                    if (error.response) {
-                        if (error.response.status == 400) {
-                            this.log.error("Bad Requests");
-                        } else if (error.response.status == 401) {
-                            this.log.error("Unauthorized");
-                        } else if (error.response.status == 403) {
-                            this.log.error("Forbidden");
-                        } else if (error.response.status == 404) {
-                            this.log.error("Not Found");
-                        } else if (error.response.status == 405) {
-                            this.log.error("Not Allowed");
-                        } else if (error.response.status == 429) {
-                            this.log.error("Too Many Requests");
-                        } else if (error.response.status < 500) {
-                            this.log.error("Client Error");
-                        } else if (error.response.status >= 500) {
-                            this.log.error("Server Error");
-                        } else {
-                            this.log.error(error.response.status);
-                        }
+                    const err = constants.STATUS_CODES[error.response];
+                    if (err) {
+                        this.log.error(err);
+                    } else {
+                        this.log.error(error.response.status);
                     }
                 }
                 status.error = JSON.stringify(error);
