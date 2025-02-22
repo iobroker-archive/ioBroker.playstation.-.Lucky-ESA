@@ -95,7 +95,7 @@ class Playstation extends utils.Adapter {
         this.getProducts = requests_store.getProducts;
         this.getWithConceptId = requests_store.getWithConceptId;
         this.getWithTitleId = requests_store.getWithTitleId;
-        this.lang = "de-DE";
+        this.lang = "us";
         this.app_agent = "";
         this.double_call = {};
         this.clients = {};
@@ -142,6 +142,7 @@ class Playstation extends utils.Adapter {
         let isOnline = true;
         this.app_agent = constants.APP_AGENT[Math.floor(Math.random() * constants.APP_AGENT.length)];
         const lang = this.config.langPSN.split("-");
+        this.lang = lang[0] ? lang[0] : this.lang;
         this.getHeader = {
             headers: {
                 "User-Agent": this.app_agent,
