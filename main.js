@@ -1189,7 +1189,7 @@ class Playstation extends utils.Adapter {
                     new_credential["device-discovery-protocol-version"] = this.deviceData.discoveryVersion;
                     val[this.deviceData.id] = new_credential;
                     const dir = path.join(homedir(), ".config");
-                    fs.mkdir(path.join(dir, "/playactor-iobroker"), err => {
+                    fs.mkdir(dir, err => {
                         if (err) {
                             this.sendTo(
                                 obj.from,

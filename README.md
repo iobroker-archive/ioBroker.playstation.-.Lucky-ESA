@@ -95,6 +95,7 @@ You can wake up the Playstation or put it into standby mode. Some buttons are al
 
 - (Lucky-ESA) Added Playstation Stars
 - (Lucky-ESA) Added Playstation Store
+- (Lucky-ESA) Fixed create folder
 
 ### 0.0.3 (2025-02-14)
 
