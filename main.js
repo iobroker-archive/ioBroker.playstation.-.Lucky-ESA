@@ -20,6 +20,7 @@ const { HttpsCookieAgent } = require("http-cookie-agent/http");
 const exec = util.promisify(require("node:child_process").exec);
 const path = require("node:path");
 const fs = require("node:fs");
+const { mkdir } = require("node:fs/promises");
 const { homedir } = require("node:os");
 const PS4 = require("./lib/connection");
 const helper = require("./lib/helper");
@@ -1189,86 +1190,84 @@ class Playstation extends utils.Adapter {
                     new_credential["device-discovery-protocol-version"] = this.deviceData.discoveryVersion;
                     val[this.deviceData.id] = new_credential;
                     const dir = path.join(homedir(), ".config");
-                    fs.mkdir(dir, err => {
-                        if (err) {
+                    if (!fs.existsSync(dir)) {
+                        const dirCreation = await mkdir(dir, { recursive: true });
+                        if (dirCreation == null) {
                             this.sendTo(
                                 obj.from,
                                 obj.command,
-                                { error: `Cannot create folder - ${JSON.stringify(err)}` },
+                                { error: `Cannot create folder - ${dir}` },
                                 obj.callback,
                             );
                             return;
                         }
-                    });
-                    fs.mkdir(path.join(dir, "/playactor-iobroker"), err => {
-                        if (err) {
+                    }
+                    if (!fs.existsSync(path.join(dir, "/playactor-iobroker"))) {
+                        const dirCreation = await mkdir(path.join(dir, "/playactor-iobroker"), { recursive: true });
+                        if (dirCreation == null) {
                             this.sendTo(
                                 obj.from,
                                 obj.command,
-                                { error: `Cannot create folder - ${JSON.stringify(err)}` },
+                                { error: `Cannot create folder - ${dir}` },
                                 obj.callback,
                             );
                             return;
                         }
-                        const credentials = path.join(homedir(), ".config", "playactor-iobroker", "credentials.json");
-                        fs.writeFile(credentials, JSON.stringify(val), err => {
-                            if (err) {
-                                this.sendTo(
-                                    obj.from,
-                                    obj.command,
-                                    { error: `Cannot write device data - ${JSON.stringify(err)}` },
-                                    obj.callback,
-                                );
-                            } else {
-                                this.sendTo(obj.from, obj.command, { result: `Write successful` }, obj.callback);
-                                this.sendTo(
-                                    obj.from,
-                                    obj.command,
-                                    {
-                                        result: `1 device found. Please request access data using the PS4 Second-Screen APP.`,
-                                    },
-                                    obj.callback,
-                                );
-                                this.sendTo(
-                                    this.resultMessage.from,
-                                    this.resultMessage.command,
-                                    `1 device found. Please request access data using the PS4 Second-Screen APP.`,
-                                    this.resultMessage.callback,
-                                );
-                                let credential = {};
-                                try {
-                                    if (fs.existsSync(`${this.adapterDir}/lib/credentials.json`)) {
-                                        const data_credentials = fs.readFileSync(
-                                            `${this.adapterDir}/lib/credentials.json`,
-                                            "utf-8",
-                                        );
-                                        if (data_credentials.startsWith("{") && data_credentials.length > 10) {
-                                            credential = JSON.parse(data_credentials);
-                                        } else {
-                                            credential[this.deviceData.address.address] = {};
-                                        }
+                    }
+                    const credentials = path.join(homedir(), ".config", "playactor-iobroker", "credentials.json");
+                    fs.writeFile(credentials, JSON.stringify(val), err => {
+                        if (err) {
+                            this.sendTo(
+                                obj.from,
+                                obj.command,
+                                { error: `Cannot write device data - ${JSON.stringify(err)}` },
+                                obj.callback,
+                            );
+                        } else {
+                            this.sendTo(obj.from, obj.command, { result: `Write successful` }, obj.callback);
+                            this.sendTo(
+                                obj.from,
+                                obj.command,
+                                {
+                                    result: `1 device found. Please request access data using the PS4 Second-Screen APP.`,
+                                },
+                                obj.callback,
+                            );
+                            this.sendTo(
+                                this.resultMessage.from,
+                                this.resultMessage.command,
+                                `1 device found. Please request access data using the PS4 Second-Screen APP.`,
+                                this.resultMessage.callback,
+                            );
+                            let credential = {};
+                            try {
+                                if (fs.existsSync(`${this.adapterDir}/lib/credentials.json`)) {
+                                    const data_credentials = fs.readFileSync(
+                                        `${this.adapterDir}/lib/credentials.json`,
+                                        "utf-8",
+                                    );
+                                    if (data_credentials.startsWith("{") && data_credentials.length > 10) {
+                                        credential = JSON.parse(data_credentials);
                                     } else {
                                         credential[this.deviceData.address.address] = {};
                                     }
-                                } catch {
+                                } else {
                                     credential[this.deviceData.address.address] = {};
                                 }
-                                credential[this.deviceData.address.address] = val;
-                                fs.writeFile(
-                                    `${this.adapterDir}/lib/credentials.json`,
-                                    JSON.stringify(credential),
-                                    err => {
-                                        if (err) {
-                                            this.log.info(`Write file error: ${err}`);
-                                        } else {
-                                            this.log.info(
-                                                `File written successfully > ${this.adapterDir}/lib/credentials.json`,
-                                            );
-                                        }
-                                    },
-                                );
+                            } catch {
+                                credential[this.deviceData.address.address] = {};
                             }
-                        });
+                            credential[this.deviceData.address.address] = val;
+                            fs.writeFile(`${this.adapterDir}/lib/credentials.json`, JSON.stringify(credential), err => {
+                                if (err) {
+                                    this.log.info(`Write file error: ${err}`);
+                                } else {
+                                    this.log.info(
+                                        `File written successfully > ${this.adapterDir}/lib/credentials.json`,
+                                    );
+                                }
+                            });
+                        }
                     });
                 } else {
                     this.sendTo(obj.from, obj.command, { error: `No account ID found` }, obj.callback);
