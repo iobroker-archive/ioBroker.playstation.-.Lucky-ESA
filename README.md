@@ -66,7 +66,7 @@ You can wake up the Playstation or put it into standby mode. Some buttons are al
 
 ## Requirements
 
-- Node 20 or 22
+- Node 20, 22 or 24
 - JS-Controller >= 6.0.11
 - Admin >= 7.0.23
 - Playstation4/5
